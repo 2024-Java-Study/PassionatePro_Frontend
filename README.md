@@ -1,70 +1,32 @@
-# Getting Started with Create React App
+## Commit
+> 커밋 메시지 작성 시 마지막에 `#이슈번호` 붙이기
+- Feat: 실습, 과제 코드 파일이나 부수적인 코드 추가
+- Fix: 코드 및 내부 파일 수정
+- Style: 문법 오류 해결, 타입 변경, 이름 변경 등의 코드 자체의 변경이 없는 작은 수정
+- Del: 쓸모 없는 코드 혹은 파일 삭제
+- Move: 프로젝트 파일 및 코드 이동
+- Rename: 파일 이름 변경
+- Merge: 다른 브랜치와의 충돌 해결 후 Merge
+- Refactor: 전면 수정
+- Docs: README.md 등 필기한 마크다운 파일 수정 및 등록
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Branch
+- `main` : 배포 시 사용
+- `develop` : 개발 시 기본 브랜치
+- `이름_유형/이슈번호` : 기능 개발
+  - ex) ajeong_feat/#1
 
-## Available Scripts
+## Issues
+- `[Type] 기능 설명`
+  - ex) [FEAT] 로그인 기능 구현
+- Assignees : assign yourself
+- Labels : enhancement
+- 기능 개발이 완료된 이슈 닫기
 
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## PR
+- `[Type] 기능 설명`
+  - ex) [FEAT] 로그인 기능 구현
+- Assignees : assign yourself
+- Development : Link an issue
+- 기능 개발이 완료된 브랜치 삭제
+- `squash and merge`로 머지
