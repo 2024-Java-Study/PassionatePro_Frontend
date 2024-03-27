@@ -1,6 +1,5 @@
 import * as S from "./LoginPage.style";
 import { useState } from "react";
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
@@ -30,7 +29,9 @@ const LoginPage = () => {
 
   return (
     <S.LoginPage>
-      <S.Title>Passionate-Pro</S.Title>
+      <S.Title>
+        <strong>Passionate-Pro</strong>
+      </S.Title>
       <S.LoginContent>
         <S.Input
           name="id"

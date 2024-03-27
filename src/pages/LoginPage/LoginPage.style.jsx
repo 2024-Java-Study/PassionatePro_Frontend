@@ -5,28 +5,28 @@ export const LoginPage = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 100vh;
 `;
 
 export const Title = styled.h1``;
 
 export const LoginContent = styled.div`
-  width: 80%;
+  width: 50%;
   display: flex;
   flex-direction: column;
 `;
 
 export const Input = styled.input`
-  //   border: 1px solid #d9d9d9;
+  padding: 10px;
+  border: 1px solid #d9d9d9;
 `;
 export const LoginButton = styled.button`
-  //   width: 100%;
+  padding: 10px;
   background-color: #7e7e7e;
   color: white;
   border: none;
 `;
 export const SignUpButton = styled.button`
-  //   width: 100%;
   background-color: white;
   border: none;
-  float: right;
 `;
