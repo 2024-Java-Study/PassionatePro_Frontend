@@ -40,7 +40,7 @@ const Header = () => {
             onClick={() => handleNavBarClick("/boards")}
             style={{ color: isActive.boards ? "black" : "gray" }}
           >
-            글쓰기
+            글 쓰기
           </S.Navbar>
         </S.RightSectionNav>
       </S.LeftSection>
