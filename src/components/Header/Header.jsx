@@ -1,4 +1,5 @@
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import * as S from "./Header.style";
 
 const Header = () => {
@@ -7,6 +8,20 @@ const Header = () => {
   const handleNavBarClick = (path) => {
     navigate(path);
   };
+
+  const location = useLocation();
+  const [isActive, setIsActive] = useState({
+    home: true,
+    boards: false,
+  });
+
+  useEffect(() => {
+    const path = location.pathname;
+    setIsActive({
+      home: path === "/",
+      boards: path === "/boards",
+    });
+  }, [location]);
 
   return (
     <S.Header>
@@ -17,11 +32,14 @@ const Header = () => {
         <S.RightSectionNav>
           <S.Navbar
             onClick={() => handleNavBarClick("/")}
-            // style={({ isActive }) => { return (isActive ? "black" : "gray", );}}
+            style={{ color: isActive.home ? "black" : "gray" }}
           >
             홈
           </S.Navbar>
-          <S.Navbar onClick={() => handleNavBarClick("/boards")}>
+          <S.Navbar
+            onClick={() => handleNavBarClick("/boards")}
+            style={{ color: isActive.boards ? "black" : "gray" }}
+          >
             글쓰기
           </S.Navbar>
         </S.RightSectionNav>
