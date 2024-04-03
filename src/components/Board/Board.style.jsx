@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 export const Board = styled.div`
-  margin: 40px 10px 40px 10px;
+  margin: 15px;
   border: 1px solid gray;
   border-radius: 10px;
   padding: 0 20px 20px 20px;
