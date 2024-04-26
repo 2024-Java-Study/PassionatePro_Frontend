@@ -18,14 +18,16 @@ export const InputTitle = styled.input`
   font-size: 30px;
   font-weight: bold;
   width: 70%;
-  padding: 10px;
+  padding: 15px;
   border: 1px solid #d9d9d9;
 `;
 
 export const InputContent = styled.textarea`
   width: 70%;
-  padding: 10px;
+  padding: 15px;
   border: 1px solid #d9d9d9;
+
+  resize: none;
 `;
 
 export const CompleteButton = styled.button`
