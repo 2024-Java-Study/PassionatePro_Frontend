@@ -1,27 +1,26 @@
-import defaultProfile from '../assets/PP_Default_Profile1.png';
-import '../styles/comment.css';
+import defaultProfile from '../../assets/PP_Default_Profile1.png';
+import * as S from "./Comment.style";
 
 const addImage = url => {
     return url == null? defaultProfile : url;
 }
 
-const addMargin = stage => {
-    if (stage==1) return 0;
-    else if (stage==2) return 10;
-}
+// const addMargin = stage => {
+//     if (stage==1) return 0;
+//     else if (stage==2) return 10;
+// }
 
-function Comment({ comment, stage }) {
+const Comment = ( comment, stage ) => {
     return (
         <div className='Comment-box'>
-            <div className='Writer-info'>
-                <img
-                    className='Writer-profile'
+            <S.WriterInfo>
+                <S.WriterProfile
                     src={addImage(comment.writerProfile)}
                 />
                 <div className='Writer-name'>
                     {comment.writerName}
                 </div>
-            </div>
+            </S.WriterInfo>
             <div>{comment.content}</div>
             <div>{comment.date}</div>
         </div>
