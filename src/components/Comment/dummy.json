@@ -1,0 +1,47 @@
+{
+    "comments": [
+        {
+            "commetId": 1, 
+            "username": "loginId",
+            "content": "댓글1 어쩌구 저쩌구",
+            "createdAt": "2024-03-08 17:39:36",
+            "replies": []
+        },
+        {
+            "commetId": 2,
+            "username": "loginId",
+            "content": "댓글2 어쩌구 저쩌구",
+            "createdAt": "2024-03-08 17:39:39",
+            "replies": [
+                {
+                                            "replyId": 1, 
+                    "username": "loginId",
+                    "content": "댓글2에 대한 답글1 어쩌구 빈칸 아님",
+                    "createdAt": "2024-03-08 17:39:49"
+                },
+                {
+                                            "replyId": 2, 
+                    "username": "loginId",
+                    "content": "댓글2에 대한 답글2 어쩌구 빈칸 아님",
+                    "createdAt": "2024-03-08 17:39:51"
+                }
+            ]
+        },
+        {
+            "commetId": 3,
+            "username": "loginId",
+            "content": "댓글3 어쩌구 저쩌구",
+            "createdAt": "2024-03-08 17:39:42",
+            "replies": [
+                {
+                    "replyId": 1, 
+                    "username": "loginId",
+                    "content": "댓글3에 대한 답글1 어쩌구 빈칸 아님",
+                    "createdAt": "2024-03-08 17:39:57"
+                }
+            ]
+        }
+    ]
+
+             
+}
