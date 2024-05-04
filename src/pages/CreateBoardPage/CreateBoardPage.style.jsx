@@ -22,14 +22,6 @@ export const InputTitle = styled.input`
   border: 1px solid #d9d9d9;
 `;
 
-export const InputContent = styled.textarea`
-  width: 70%;
-  padding: 15px;
-  border: 1px solid #d9d9d9;
-
-  resize: none;
-`;
-
 export const CompleteButton = styled.button`
   width: 70%;
   padding: 10px;
