@@ -7,7 +7,9 @@ export const Board = styled.div`
   padding: 0 20px 20px 20px;
 `;
 
-export const Title = styled.h2``;
+export const Title = styled.h2`
+  color: black;
+`;
 export const Content = styled.div`
   margin: 10px 0 10px 0;
   color: gray;
@@ -17,6 +19,7 @@ export const Detail = styled.div`
 `;
 export const Username = styled.div`
   margin: 0 5px 0 0;
+  color: black;
 `;
 export const Date = styled.div`
   color: gray;
