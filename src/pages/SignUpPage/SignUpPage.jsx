@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 const signupAPI = async (prop) => {
   const API = process.env.REACT_APP_API_URL + "/members/signup";
   try {
-    console.log("호출");
     const result = await axios.post(
       API,
       {
@@ -30,21 +29,20 @@ const signupAPI = async (prop) => {
   }
 };
 
-const APITest = () => {
-  console.log("클릭");
-  const API = process.env.REACT_APP_API_URL + "/api/test";
-  axios
-    .get(API)
-    .then((result) => {
-      console.log(result);
-      window.alert("API 테스트");
-      // history.replace(process.env.REACT_APP_API_URL + "/members/login");
-    })
-    .catch((error) => {
-      window.alert("API 테스트 연결 에러");
-      console.log(error);
-    });
-};
+// const APITest = () => {
+//   const API = process.env.REACT_APP_API_URL + "/api/test";
+//   axios
+//     .get(API)
+//     .then((result) => {
+//       console.log(result);
+//       window.alert("API 테스트");
+//       // history.replace(process.env.REACT_APP_API_URL + "/members/login");
+//     })
+//     .catch((error) => {
+//       window.alert("API 테스트 연결 에러");
+//       console.log(error);
+//     });
+// };
 
 const SignUpPage = () => {
   const navigate = useNavigate();
