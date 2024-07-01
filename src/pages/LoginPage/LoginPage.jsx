@@ -62,7 +62,7 @@ const LoginPage = () => {
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
-            // withCredentials: true,
+            withCredentials: true,
             // token: token,
           },
         }
