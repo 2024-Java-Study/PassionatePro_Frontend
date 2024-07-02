@@ -40,7 +40,9 @@ const CreateBoardPage = () => {
   };
 
   const navigate = useNavigate();
-  const navigateToHomePage = () => {
+  const handleCreateBoardPage = (e) => {
+    e.preventDefault();
+    createBoardAPI(boardInfo.title, boardInfo.content);
     navigate("/");
   };
 
@@ -71,7 +73,9 @@ const CreateBoardPage = () => {
         />
         <br />
         <br />
-        <S.CompleteButton onClick={navigateToHomePage}>작성</S.CompleteButton>
+        <S.CompleteButton onClick={handleCreateBoardPage}>
+          작성
+        </S.CompleteButton>
       </S.CreateBoardContent>
     </S.CreateBoardPage>
   );
