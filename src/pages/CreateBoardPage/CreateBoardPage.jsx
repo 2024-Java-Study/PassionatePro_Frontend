@@ -3,8 +3,30 @@ import { Header, PageLayout } from "../../components";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TextareaAutosize from "react-textarea-autosize";
+import axios from "axios";
+import { setCookie, getCookie } from "../../cookie";
 
 const CreateBoardPage = () => {
+  const createBoardAPI = (title, content) => {
+    const API = process.env.REACT_APP_API_URL + "/boards";
+
+    axios.post(
+      API,
+      {
+        title: title,
+        content: content,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          withCredentials: true,
+          RefreshToken: `Bearer ${getCookie("id")}`,
+        },
+      }
+    );
+  };
+
   const [boardInfo, setBoardInfo] = useState({
     title: "",
     content: "",

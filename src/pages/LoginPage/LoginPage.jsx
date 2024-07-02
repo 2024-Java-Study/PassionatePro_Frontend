@@ -2,38 +2,10 @@ import * as S from "./LoginPage.style";
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useCookies } from "react-cookie";
-
-// const loginAPI = async (username, password) => {
-//   // const [cookies, setCookie] = useCookies(["id"]);
-//   const API = process.env.REACT_APP_API_URL + "/members/login";
-//   try {
-//     const result = await axios.post(
-//       API,
-//       {
-//         username: username,
-//         password: password,
-//       },
-//       {
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//       }
-//     );
-//     console.log(result);
-//     window.alert("로그인 성공");
-//     console.log(result.data.token);
-//     // setCookie("id", result.data.token); // 쿠키에 토큰 저장
-//   } catch (error) {
-//     window.alert("로그인 실패");
-//     console.log(username);
-//     console.log(password);
-//     console.log(error);
-//   }
-// };
+import { setCookie, getCookie } from "../../cookie";
 
 const LoginPage = () => {
-  // const formRef = useRef();
+  // const [cookies, setCookie] = cookies(["id"]);
   const [loginInfo, setLoginInfo] = useState({
     username: "",
     password: "",
@@ -49,8 +21,7 @@ const LoginPage = () => {
   const loginAPI = (username, password) => {
     const API = process.env.REACT_APP_API_URL + "/members/login";
 
-    // setCookie("id", process.env.REACT_APP_COOKIE);
-    // const token = cookies.id;
+    // setCookie("test", "test1234"); // 쿠키 저장
     axios
       .post(
         API,
@@ -63,21 +34,15 @@ const LoginPage = () => {
             "Content-Type": "application/json",
             Accept: "application/json",
             withCredentials: true,
-            // token: token,
           },
         }
       )
       .then((result) => {
         console.log(result);
-        console.log(username);
-        console.log(password);
         window.alert("로그인 성공");
-        console.log(result.data.token);
-        // setCookie("id", result.data.token); // 쿠키에 토큰 저장
+        // cookies.setCookie("id", result.data.token); // 쿠키에 토큰 저장
       })
       .catch((error) => {
-        console.log(username);
-        console.log(password);
         window.alert("로그인 실패");
         console.log(error);
       });
