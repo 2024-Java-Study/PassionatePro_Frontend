@@ -2,7 +2,6 @@ import * as S from "./LoginPage.style";
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useCookies } from "react-cookie";
 
 // const loginAPI = async (username, password) => {
 //   // const [cookies, setCookie] = useCookies(["id"]);
@@ -33,7 +32,6 @@ import { useCookies } from "react-cookie";
 // };
 
 const LoginPage = () => {
-  // const [cookies, setCookie] = cookies(["id"]);
   const [loginInfo, setLoginInfo] = useState({
     username: "",
     password: "",
