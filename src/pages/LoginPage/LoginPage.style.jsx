@@ -25,8 +25,10 @@ export const LoginButton = styled.button`
   background-color: #7e7e7e;
   color: white;
   border: none;
+  cursor: pointer;
 `;
 export const SignUpButton = styled.button`
   background-color: white;
   border: none;
+  cursor: pointer;
 `;

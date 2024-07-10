@@ -42,6 +42,7 @@ export const SearchIcon = styled.button`
   background-position: center;
   border: none;
   background-color: white;
+  cursor: pointer;
 `;
 export const SearchLine = styled.div`
   border: 1px solid black;

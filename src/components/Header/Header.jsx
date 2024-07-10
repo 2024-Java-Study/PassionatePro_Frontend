@@ -19,7 +19,7 @@ const Header = () => {
     const path = location.pathname;
     setIsActive({
       home: path === "/",
-      boards: path === "/boards",
+      boards: path === "/boards/new",
     });
   }, [location]);
 
@@ -37,7 +37,7 @@ const Header = () => {
             홈
           </S.Navbar>
           <S.Navbar
-            onClick={() => handleNavBarClick("/boards")}
+            onClick={() => handleNavBarClick("/boards/new")}
             style={{ color: isActive.boards ? "black" : "gray" }}
           >
             글 쓰기
