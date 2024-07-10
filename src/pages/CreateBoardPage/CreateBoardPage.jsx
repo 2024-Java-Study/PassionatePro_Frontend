@@ -4,27 +4,26 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TextareaAutosize from "react-textarea-autosize";
 import axios from "axios";
-import { setCookie, getCookie } from "../../cookie";
 
 const CreateBoardPage = () => {
-  const createBoardAPI = (title, content) => {
+  const createBoardAPI = (formData) => {
     const API = process.env.REACT_APP_API_URL + "/boards";
 
-    axios.post(
-      API,
-      {
-        title: title,
-        content: content,
-      },
-      {
+    axios
+      .post(API, formData, {
+        withCredentials: true,
         headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          withCredentials: true,
-          RefreshToken: `Bearer ${getCookie("id")}`,
+          "Content-Type": "multipart/form-data",
         },
-      }
-    );
+      })
+      .then((result) => {
+        console.log(result);
+        console.log("성공");
+      })
+      .catch((error) => {
+        console.log(error);
+        console.log("실패");
+      });
   };
 
   const [boardInfo, setBoardInfo] = useState({
@@ -42,7 +41,12 @@ const CreateBoardPage = () => {
   const navigate = useNavigate();
   const handleCreateBoardPage = (e) => {
     e.preventDefault();
-    createBoardAPI(boardInfo.title, boardInfo.content);
+
+    const formData = new FormData();
+    formData.append("title", boardInfo.title);
+    formData.append("content", boardInfo.content);
+
+    createBoardAPI(formData);
     navigate("/");
   };
 
