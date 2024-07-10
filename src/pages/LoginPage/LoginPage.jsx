@@ -32,6 +32,7 @@ import axios from "axios";
 // };
 
 const LoginPage = () => {
+  // const formRef = useRef();
   const [loginInfo, setLoginInfo] = useState({
     username: "",
     password: "",
@@ -63,11 +64,13 @@ const LoginPage = () => {
       )
       .then((result) => {
         console.log(result);
+        console.log(username);
+        console.log(password);
         window.alert("로그인 성공");
-        console.log(result.data.token);
-        // setCookie("id", result.data.token); // 쿠키에 토큰 저장
       })
       .catch((error) => {
+        console.log(username);
+        console.log(password);
         window.alert("로그인 실패");
         console.log(error);
       });
