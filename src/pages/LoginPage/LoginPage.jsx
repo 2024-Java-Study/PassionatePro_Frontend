@@ -46,7 +46,7 @@ const LoginPage = () => {
   };
 
   const loginAPI = (username, password) => {
-    const API = process.env.REACT_APP_API_URL + '/members/login';
+    const API = process.env.REACT_APP_API_URL + "/members/login";
     axios
       .post(
         API,
@@ -55,12 +55,12 @@ const LoginPage = () => {
           password: password,
         },
         {
-          withCredentials: true, 
+          withCredentials: true,
           headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          }
-        } 
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        }
       )
       .then((result) => {
         console.log(result);

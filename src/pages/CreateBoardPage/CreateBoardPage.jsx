@@ -3,8 +3,29 @@ import { Header, PageLayout } from "../../components";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TextareaAutosize from "react-textarea-autosize";
+import axios from "axios";
 
 const CreateBoardPage = () => {
+  const createBoardAPI = (formData) => {
+    const API = process.env.REACT_APP_API_URL + "/boards";
+
+    axios
+      .post(API, formData, {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((result) => {
+        console.log(result);
+        console.log("성공");
+      })
+      .catch((error) => {
+        console.log(error);
+        console.log("실패");
+      });
+  };
+
   const [boardInfo, setBoardInfo] = useState({
     title: "",
     content: "",
@@ -18,7 +39,14 @@ const CreateBoardPage = () => {
   };
 
   const navigate = useNavigate();
-  const navigateToHomePage = () => {
+  const handleCreateBoardPage = (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("title", boardInfo.title);
+    formData.append("content", boardInfo.content);
+
+    createBoardAPI(formData);
     navigate("/");
   };
 
@@ -49,7 +77,9 @@ const CreateBoardPage = () => {
         />
         <br />
         <br />
-        <S.CompleteButton onClick={navigateToHomePage}>작성</S.CompleteButton>
+        <S.CompleteButton onClick={handleCreateBoardPage}>
+          작성
+        </S.CompleteButton>
       </S.CreateBoardContent>
     </S.CreateBoardPage>
   );
