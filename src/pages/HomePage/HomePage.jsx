@@ -1,15 +1,14 @@
 import { useState } from "react";
 import { Board, Header, PageLayout } from "../../components";
-import dummy from "../../components/Board/dummy.json";
 import * as S from "./HomePage.style";
 import axios from "axios";
 import { useEffect } from "react";
 
 const HomePage = () => {
-  const findAllBoardAPI = () => {
+  const findAllBoardAPI = async () => {
     const API = process.env.REACT_APP_API_URL + "/boards";
 
-    axios
+    await axios
       .get(API, {
         withCredentials: true,
         headers: {
@@ -27,7 +26,7 @@ const HomePage = () => {
       });
   };
 
-  const [result, setResult] = useState("");
+  const [result, setResult] = useState();
   const [searchInfo, setSearchInfo] = useState("");
   const onChangeSearchInfo = (e) => {
     setSearchInfo(e.target.value);
@@ -43,9 +42,8 @@ const HomePage = () => {
       <S.Line></S.Line>
       <S.Content>
         <S.ContentHeader>
-          {/* <S.CountBoardList>전체 글 {dummy.boardList.length}</S.CountBoardList> */}
           <S.CountBoardList>
-            전체 글 {result.data.response.total}
+            전체 글 {result ? result.data.response.total : 0}
           </S.CountBoardList>
           <S.SearchSection>
             <S.SearchSectionContent>
@@ -61,12 +59,11 @@ const HomePage = () => {
           </S.SearchSection>
         </S.ContentHeader>
         <S.BoardList>
-          {dummy.boardList.map((board) => (
-            <Board key={board.id} board={board}></Board>
-          ))}
-          {/* {result.response.boards.map((board) => (
-            <Board key={board.id} board={board}></Board>
-          ))} */}
+          {result
+            ? result.data.response.boards.map((board) => (
+                <Board key={board.id} board={board}></Board>
+              ))
+            : []}
         </S.BoardList>
       </S.Content>
     </S.HomePage>
