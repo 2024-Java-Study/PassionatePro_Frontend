@@ -5,22 +5,29 @@ import * as S from "./HomePage.style";
 import axios from "axios";
 import { useEffect } from "react";
 
-const findAllBoardAPI = async () => {
-  const API = process.env.REACT_APP_API_URL + "/boards";
-  // try {
-  //   const result = await axios.get(API);
-  //   console.log(result);
-  //   window.alert("전체 게시물 조회");
-  //   // setCookie("id", result.data.token); // 쿠키에 토큰 저장
-  //   return result;
-  // } catch (error) {
-  //   window.alert("전체 게시물 조회 실패");
-  //   console.log(error);
-  // }
-};
-
 const HomePage = () => {
-  const result = "";
+  const findAllBoardAPI = () => {
+    const API = process.env.REACT_APP_API_URL + "/boards";
+
+    axios
+      .get(API, {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((result) => {
+        console.log(result);
+        setResult(result);
+        console.log("성공");
+      })
+      .catch((error) => {
+        console.log(error);
+        console.log("실패");
+      });
+  };
+
+  const [result, setResult] = useState("");
   const [searchInfo, setSearchInfo] = useState("");
   const onChangeSearchInfo = (e) => {
     setSearchInfo(e.target.value);
@@ -36,8 +43,10 @@ const HomePage = () => {
       <S.Line></S.Line>
       <S.Content>
         <S.ContentHeader>
-          <S.CountBoardList>전체 글 {dummy.boardList.length}</S.CountBoardList>
-          {/* <S.CountBoardList>전체 글 {result.response.total}</S.CountBoardList> */}
+          {/* <S.CountBoardList>전체 글 {dummy.boardList.length}</S.CountBoardList> */}
+          <S.CountBoardList>
+            전체 글 {result.data.response.total}
+          </S.CountBoardList>
           <S.SearchSection>
             <S.SearchSectionContent>
               <S.InputSection
