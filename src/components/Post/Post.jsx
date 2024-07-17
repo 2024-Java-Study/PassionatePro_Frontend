@@ -35,8 +35,8 @@ const PostContainer = ({post}) => (
     <S.PostContainer>
         <S.PostContent>{post.content}</S.PostContent>
         <S.PostImages>
-            {/* {post.urlList.map((url) => ( */}
-            {urlList.map((url) => (
+            {/* {urlList.map((url) => ( */}
+            {post.urlList.map((url) => (
                     <S.PostImage src={url}></S.PostImage>
             ))}
         </S.PostImages>
@@ -46,8 +46,8 @@ const PostContainer = ({post}) => (
 const Post = ({post}) => {
    return (
         <S.Post>
-            <PostHeader postInfo={{title: post.title, username: post.username, date: post.date}}/>
-            <PostContainer post={{content: post.content}} />
+            <PostHeader postInfo={{title: post.title, username: post.username, date: post.createdAt}}/>
+            <PostContainer post={{content: post.content, urlList: post.urlList}} />
         </S.Post>
     );
 };

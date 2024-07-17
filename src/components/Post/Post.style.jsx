@@ -39,8 +39,8 @@ export const PostImages = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 100%;
-    height: 100%;
+    width: 80%;
+    height: 80%;
     margin: 40px 0 40px 0;
 `;
 export const PostImage = styled.img`
