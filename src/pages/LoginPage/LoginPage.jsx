@@ -3,36 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-// const loginAPI = async (username, password) => {
-//   // const [cookies, setCookie] = useCookies(["id"]);
-//   const API = process.env.REACT_APP_API_URL + "/members/login";
-//   try {
-//     const result = await axios.post(
-//       API,
-//       {
-//         username: username,
-//         password: password,
-//       },
-//       {
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//       }
-//     );
-//     console.log(result);
-//     window.alert("로그인 성공");
-//     console.log(result.data.token);
-//     // setCookie("id", result.data.token); // 쿠키에 토큰 저장
-//   } catch (error) {
-//     window.alert("로그인 실패");
-//     console.log(username);
-//     console.log(password);
-//     console.log(error);
-//   }
-// };
-
 const LoginPage = () => {
-  // const formRef = useRef();
   const [loginInfo, setLoginInfo] = useState({
     username: "",
     password: "",

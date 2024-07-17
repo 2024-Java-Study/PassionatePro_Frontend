@@ -18,11 +18,11 @@ const CreateBoardPage = () => {
       })
       .then((result) => {
         console.log(result);
-        console.log("성공");
+        console.log("게시물 생성 성공");
       })
       .catch((error) => {
         console.log(error);
-        console.log("실패");
+        console.log("게시물 생성 실패");
       });
   };
 
