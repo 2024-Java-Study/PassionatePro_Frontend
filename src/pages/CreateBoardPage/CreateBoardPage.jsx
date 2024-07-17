@@ -29,6 +29,7 @@ const CreateBoardPage = () => {
   const [boardInfo, setBoardInfo] = useState({
     title: "",
     content: "",
+    file: "",
   });
 
   const onChangeInfo = (e) => {
@@ -41,10 +42,30 @@ const CreateBoardPage = () => {
   const navigate = useNavigate();
   const handleCreateBoardPage = (e) => {
     e.preventDefault();
+    console.log(e);
 
     const formData = new FormData();
-    formData.append("title", boardInfo.title);
-    formData.append("content", boardInfo.content);
+
+    // const signup = {
+    //   title,
+    //   content,
+    // };
+    // signup.title = boardInfo.title;
+    // signup.content = boardInfo.content;
+
+    // formData.append(
+    //   "signup",
+    //   new Blob([JSON.stringify(signup)], { type: "application/json" })
+    // );
+
+    // let jsonData = JSON.stringify({
+    //   title: boardInfo.title,
+    //   content: boardInfo.content,
+    // });
+    // formData.append("jsonData", jsonData);
+    formData.append("title", JSON.stringify(boardInfo.title));
+    formData.append("content", JSON.stringify(boardInfo.content));
+    formData.append("images", boardInfo.file);
 
     createBoardAPI(formData);
     navigate("/");
@@ -74,6 +95,12 @@ const CreateBoardPage = () => {
           value={boardInfo.content}
           placeholder="내용을 입력하세요 ..."
           minRows={10}
+        />
+        <S.UploadFile
+          name="file"
+          type="file"
+          accept="image/*"
+          onClick={onChangeInfo}
         />
         <br />
         <br />

@@ -30,3 +30,5 @@ export const CompleteButton = styled.button`
   border: none;
   cursor: pointer;
 `;
+
+export const UploadFile = styled.input``;
