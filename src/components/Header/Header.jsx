@@ -45,6 +45,9 @@ const Header = () => {
         </S.RightSectionNav>
       </S.LeftSection>
       <S.RightSection>
+      <S.Navbar
+        onClick={()=> handleNavBarClick("/members/login")}>
+        로그인</S.Navbar>
         <S.Navbar>로그아웃</S.Navbar>
       </S.RightSection>
     </S.Header>
