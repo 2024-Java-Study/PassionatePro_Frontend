@@ -1,21 +1,17 @@
 import * as S from "./PostPage.style";
 import { Header, PageLayout, Post, Comment, CommentInput } from "../../components";
-import dummy from "../../components/Comment/dummy.json";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 
 const PostPage = () => {
     const [data, setData] = useState(null);
-    // const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
     const location = useLocation();
     const post = location.state?.board;
     useEffect(() => {
-        console.log("useEffect start")
         try {
-            console.log("try block start")
             setData(null);
             setError(null);
             const PostReadAPI = async () => {
@@ -28,8 +24,7 @@ const PostPage = () => {
                     }
                 );
                 setData(result.data);
-                console.log("result");
-                console.log(result.data.response);
+                // console.log(result.data.response);
             };
             PostReadAPI(post);
         } catch (e) {
@@ -48,7 +43,6 @@ const PostPage = () => {
                 <S.Line></S.Line>
                 <S.CommentBox>
                     <S.Comments>
-                        {/* {dummy.comments.map((comment) => ( */}
                          {data.response.comments.map((comment) => (
                             <Comment comment={comment}></Comment>
                         ))}

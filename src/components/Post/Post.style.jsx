@@ -38,14 +38,14 @@ export const PostContent = styled.div`
 export const PostImages = styled.div`
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    width: 80%;
-    height: 80%;
+    justify-content: space-evenly;
+    overflow: auto;
+    width: auto;
+    height: 10em;
     margin: 40px 0 40px 0;
 `;
 export const PostImage = styled.img`
-    flex: 1;
     margin: 0 10px 0 10px;
-    width: 30%;
-    height: 30%;
+    width: auto;
+    height: 10em;
 `;
