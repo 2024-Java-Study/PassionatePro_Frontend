@@ -29,8 +29,9 @@ const CreateBoardPage = () => {
   const [boardInfo, setBoardInfo] = useState({
     title: "",
     content: "",
-    file: "",
   });
+
+  const [file, setFile] = useState(null);
 
   const onChangeInfo = (e) => {
     setBoardInfo({
@@ -39,33 +40,18 @@ const CreateBoardPage = () => {
     });
   };
 
+  const onChangeFile = (e) => {
+    setFile(e.target.files);
+  };
+
   const navigate = useNavigate();
   const handleCreateBoardPage = (e) => {
     e.preventDefault();
-    console.log(e);
 
     const formData = new FormData();
-
-    // const signup = {
-    //   title,
-    //   content,
-    // };
-    // signup.title = boardInfo.title;
-    // signup.content = boardInfo.content;
-
-    // formData.append(
-    //   "signup",
-    //   new Blob([JSON.stringify(signup)], { type: "application/json" })
-    // );
-
-    // let jsonData = JSON.stringify({
-    //   title: boardInfo.title,
-    //   content: boardInfo.content,
-    // });
-    // formData.append("jsonData", jsonData);
-    formData.append("title", JSON.stringify(boardInfo.title));
-    formData.append("content", JSON.stringify(boardInfo.content));
-    formData.append("images", boardInfo.file);
+    formData.append("title", boardInfo.title);
+    formData.append("content", boardInfo.content);
+    formData.append("images", file[0]);
 
     createBoardAPI(formData);
     navigate("/");
@@ -100,7 +86,7 @@ const CreateBoardPage = () => {
           name="file"
           type="file"
           accept="image/*"
-          onClick={onChangeInfo}
+          onChange={onChangeFile}
         />
         <br />
         <br />
