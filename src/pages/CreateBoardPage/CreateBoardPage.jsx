@@ -1,11 +1,30 @@
 import * as S from "./CreateBoardPage.style";
 import { Header, PageLayout } from "../../components";
-import { useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TextareaAutosize from "react-textarea-autosize";
 import axios from "axios";
 
 const CreateBoardPage = () => {
+
+  const inputEl = useRef(null);
+  const [fileName, setFileName] = useState("");
+  const fileInputHandler = useCallback((event) => {
+    const files = event.target && event.target.files;
+    if (files && files[0]) {
+      setFileName(event.target.files[0].name);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (inputEl.current !== null) {
+      inputEl.current.addEventListener("input", fileInputHandler);
+    }
+    return () => {
+      inputEl.current && inputEl.current.removeEventListener("input", fileInputHandler);
+    };
+  }, [inputEl, fileInputHandler]);
+
   const createBoardAPI = (formData) => {
     const API = process.env.REACT_APP_API_URL + "/boards";
 
@@ -82,12 +101,23 @@ const CreateBoardPage = () => {
           placeholder="내용을 입력하세요 ..."
           minRows={10}
         />
+        <label for="file">
+        <S.StyledFileInput>
+        <S.AttachmentButton>📂 FILE </S.AttachmentButton>
+        </S.StyledFileInput>
+        </label>
         <S.UploadFile
           name="file"
           type="file"
           accept="image/*"
           onChange={onChangeFile}
+          id="file"
+          ref={inputEl}
         />
+
+{fileName?
+        <S.AttachedFile className="file-name">{fileName}</S.AttachedFile> : ""}
+        
         <br />
         <br />
         <S.CompleteButton onClick={handleCreateBoardPage}>
