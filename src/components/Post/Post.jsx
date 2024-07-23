@@ -22,13 +22,17 @@ const urlList = [
 ];
 
 const PostContainer = ({post}) => {
+    const containFiles = post.urlList.length > 0;
+    console.log("hasFile:" + containFiles)
     return (<S.PostContainer>
         <S.PostContent>{post.content}</S.PostContent>
+        { containFiles && 
         <S.PostImages>
             {post.urlList.map((url) => (
                 <S.PostImage src={url}></S.PostImage>
-            ))}
-        </S.PostImages>
+             ))}
+        </S.PostImages> 
+        }
     </S.PostContainer>);
 };
 
