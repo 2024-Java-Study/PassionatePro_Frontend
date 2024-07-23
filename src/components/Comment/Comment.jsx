@@ -5,14 +5,14 @@ const addImage = url => {
     return url == null? defaultProfile : url;
 }
 
-// const addMargin = stage => {
-//     if (stage==1) return 0;
-//     else if (stage==2) return 10;
-// }
+const addMarginLeft = stage => {
+    if (stage==0) return 0;
+    else if (stage==1) return 50;
+}
 
-const Comment = ({ comment }) => {
+const Comment = ({ comment, stage }) => {
     return (
-        <S.Comment key={comment.commentId}>
+        <S.Comment key={comment.commentId} style={{marginLeft: addMarginLeft(stage)}}>
             <S.CommentHeader>
                 <S.WriterProfile src={addImage(comment.writerProfile)}/>
                 <S.WriterName>{comment.username}</S.WriterName>

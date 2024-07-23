@@ -23,7 +23,6 @@ const urlList = [
 
 const PostContainer = ({post}) => {
     const containFiles = post.urlList.length > 0;
-    console.log("hasFile:" + containFiles)
     return (<S.PostContainer>
         <S.PostContent>{post.content}</S.PostContent>
         { containFiles && 

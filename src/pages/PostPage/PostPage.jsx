@@ -24,7 +24,7 @@ const PostPage = () => {
                     }
                 );
                 setData(result.data);
-                // console.log(result.data.response);
+                console.log(result.data.response);
             };
             PostReadAPI(post);
         } catch (e) {
@@ -33,24 +33,39 @@ const PostPage = () => {
         }
     }, []);
 
+    const Comments = ({comments}) =>  ( 
+        <S.Comments>
+        { comments.map((comment) => (
+            <S.CommentWithReplies> 
+                <Comment comment={comment} stage={0}></Comment>
+                <Replies replies={comment.replies}></Replies>
+            </S.CommentWithReplies>
+        ))}
+        </S.Comments>
+    );
+
+    const Replies = ({replies}) => (
+        <S.Replies>
+            { replies.map((reply) => (
+                <Comment comment={reply} stage={1}></Comment>
+            ))}
+        </S.Replies>
+    );
+
     return (
         <S.PostPage>
             <PageLayout header={<Header />}></PageLayout>
             <S.HeaderLine></S.HeaderLine>
-            {data  && 
+            { data && 
             <S.PageBox>
                 <Post post={ data.response }></Post>
                 <S.Line></S.Line>
                 <S.CommentBox>
-                    <S.Comments>
-                         {data.response.comments.map((comment) => (
-                            <Comment comment={comment}></Comment>
-                        ))}
-                    </S.Comments>
+                    <Comments comments={data.response.comments}></Comments>
                     <CommentInput></CommentInput>
                 </S.CommentBox>
             </S.PageBox>
-        }
+            }
         </S.PostPage>
     );
 };
