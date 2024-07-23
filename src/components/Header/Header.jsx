@@ -47,6 +47,7 @@ const Header = () => {
       <S.RightSection>
         <S.ProfileButton
           onClick={() => handleNavBarClick("/members/me")}>
+          MyPage
         </S.ProfileButton>
       <S.Navbar
         onClick={()=> handleNavBarClick("/members/login")}>

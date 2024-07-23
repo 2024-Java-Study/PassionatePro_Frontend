@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import profileImage from "../../assets/images/profile_button.png"
+import profileImage from "../../assets/images/default_profile.png"
 
 export const Header = styled.div`
   display: flex;
@@ -44,18 +44,9 @@ export const ProfileButton = styled.button`
   border: none;
   cursor: pointer;
 
-  background-image: url(${profileImage});
-  background-position: top center;
-  background-size: cover;
-
-  font-size: 23px;
-  font-family: "Inter-ExtraBold";
   font-weight: bold;
+  font-size: 23px;
   padding: 0 0px 0 40px;
-  width: 40px;
-  height: 40px;
-
-  margin-top: 40px;
 `;
 
 export const RightSection = styled.div`
