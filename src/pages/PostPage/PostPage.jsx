@@ -10,6 +10,7 @@ const PostPage = () => {
 
     const location = useLocation();
     const post = location.state?.board;
+    
     useEffect(() => {
         try {
             setData(null);
@@ -24,7 +25,7 @@ const PostPage = () => {
                     }
                 );
                 setData(result.data);
-                console.log(result.data.response);
+                // console.log(result.data.response);
             };
             PostReadAPI(post);
         } catch (e) {
@@ -37,7 +38,7 @@ const PostPage = () => {
         <S.Comments>
         { comments.map((comment) => (
             <S.CommentWithReplies> 
-                <Comment comment={comment} stage={0}></Comment>
+                <Comment key={comment.commentId} comment={comment} stage={0}></Comment>
                 <Replies replies={comment.replies}></Replies>
             </S.CommentWithReplies>
         ))}
@@ -47,7 +48,7 @@ const PostPage = () => {
     const Replies = ({replies}) => (
         <S.Replies>
             { replies.map((reply) => (
-                <Comment comment={reply} stage={1}></Comment>
+                <Comment key={reply.replyId} comment={reply} stage={1}></Comment>
             ))}
         </S.Replies>
     );
@@ -58,7 +59,7 @@ const PostPage = () => {
             <S.HeaderLine></S.HeaderLine>
             { data && 
             <S.PageBox>
-                <Post post={ data.response }></Post>
+                <Post key={post.id} post={ data.response }></Post>
                 <S.Line></S.Line>
                 <S.CommentBox>
                     <Comments comments={data.response.comments}></Comments>
