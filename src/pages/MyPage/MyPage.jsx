@@ -1,12 +1,38 @@
 import * as S from "./MyPage.style";
-import { Header, PageLayout } from "../../components";
-import { useEffect, useState } from "react";
+import { Header, PageLayout, ProfileImage } from "../../components";
+import { useEffect, useState, useRef, useCallback } from "react";
 import axios from "axios";
-import profileImage from "../../assets/images/default_profile.png"
+import profileImageAssets from "../../assets/images/default_profile.png";
 
 const MyPage = () => {
 
     const [result, setResult] = useState();
+    const [profile, setProfile] = useState(profileImageAssets);
+
+    const inputEl = useRef(null);
+    const [fileName, setFileName] = useState("");
+    const fileInputHandler = useCallback((event) => {
+        const files = event.target && event.target.files;
+        if (files && files[0]) {
+        setFileName(event.target.files[0].name);
+        }
+    }, []);
+
+    useEffect(() => {
+        if (inputEl.current !== null) {
+          inputEl.current.addEventListener("input", fileInputHandler);
+        }
+        return () => {
+          inputEl.current && inputEl.current.removeEventListener("input", fileInputHandler);
+        };
+      }, [inputEl, fileInputHandler]);
+
+      const [file, setFile] = useState(null);
+
+      const onChangeFile = (e) => {
+        setFile(e.target.files);
+      };
+
     const getMyProfile = async () => {
         const API = process.env.REACT_APP_API_URL + "/members/profiles";
 
@@ -27,10 +53,34 @@ const MyPage = () => {
         })
     }
 
-    const getImage = () => {
-        if (result.data.response.profile == null) {
-            return profileImage;
-        }
+    const handleProfileImage = (e) => {
+        e.preventDefault();
+    
+        const formData = new FormData();
+        formData.append("image", file[0]);
+
+        changeProfileImage(formData);
+      };
+
+    const changeProfileImage = (formData) => {
+        console.log("프로필 사진 수정 시도");
+        const API = process.env.REACT_APP_API_URL + "/members/profiles";
+        
+        axios
+            .put(API, formData, {
+            withCredentials: true,
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        })
+        .then((result) => {
+            console.log(result);
+            console.log("프로필 사진 수정에 성공하였습니다.");
+        })
+        .catch((error) => {
+            console.log(error);
+            console.log("프로필 사진 수정에 실패하였습니다.");
+        })
     }
 
     useEffect(() => {
@@ -38,8 +88,8 @@ const MyPage = () => {
     }, [])
 
     useEffect(() => {
-        if (result) {
-            getImage();
+        if (result && result.data.response.profile != null) {
+            setProfile(result.data.response.profile);
         }
         }, [result])
 
@@ -49,7 +99,7 @@ const MyPage = () => {
             <PageLayout header={<Header />}></PageLayout>
             <S.HeaderLine></S.HeaderLine>
             <S.Content>
-                <S.ProfileImage style={{ backgroundImage: `url(${result? getImage() : null})`}}></S.ProfileImage>
+                <S.ProfileImage style={{ backgroundImage: `url(${result? profile : null})`}}></S.ProfileImage>
                 <S.Table>
                     <S.Tbody>
                         <S.Tr>
@@ -67,8 +117,24 @@ const MyPage = () => {
                     </S.Tbody>
                 </S.Table>
                 <S.ButtonSection>
-                    <S.Button>프로필 수정</S.Button>
+                    {/* <S.ProfileButton
+                    onClick={changeProfileImage}>프로필 수정</S.ProfileButton> */}
+                    <label for="file">
+                        <S.StyledFileInput>
+                            <S.AttachmentButton>수정하기</S.AttachmentButton>
+                        </S.StyledFileInput>
+                    </label>
+                    <S.ProfileButton 
+                        name="file"
+                        type="file"
+                        accept="image/*"
+                        id = "file"
+                        ref={inputEl}
+                        onChange={onChangeFile}
+                    /> {fileName?
+                        <S.AttachedFile className="file-name">{fileName}</S.AttachedFile> : ""}                
                     <S.Button>탈퇴하기</S.Button>
+                    <S.Button onClick={handleProfileImage}>완료</S.Button>
                 </S.ButtonSection>
             </S.Content>
         </S.MyPage>
