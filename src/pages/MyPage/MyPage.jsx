@@ -2,6 +2,7 @@ import * as S from "./MyPage.style";
 import { Header, PageLayout } from "../../components";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import profileImage from "../../assets/images/default_profile.png"
 
 const MyPage = () => {
 
@@ -26,9 +27,21 @@ const MyPage = () => {
         })
     }
 
+    const getImage = () => {
+        if (result.data.response.profile == null) {
+            return profileImage;
+        }
+    }
+
     useEffect(() => {
         getMyProfile();
     }, [])
+
+    useEffect(() => {
+        if (result) {
+            getImage();
+        }
+        }, [result])
 
     return (
         // username, nickname, profile, email
@@ -36,7 +49,7 @@ const MyPage = () => {
             <PageLayout header={<Header />}></PageLayout>
             <S.HeaderLine></S.HeaderLine>
             <S.Content>
-                <S.ProfileImage></S.ProfileImage>
+                <S.ProfileImage style={{ backgroundImage: `url(${result? getImage() : null})`}}></S.ProfileImage>
                 <S.Table>
                     <S.Tbody>
                         <S.Tr>

@@ -61,7 +61,7 @@ export const Button = styled.button`
 
 export const ProfileImage = styled.div`
 
-  background-image: url(${profileImage});
+  // background-image: url(${profileImage});
   width: 70px;
   height: 70px;
   background-size: cover;
