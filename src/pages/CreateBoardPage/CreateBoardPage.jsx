@@ -103,7 +103,7 @@ const CreateBoardPage = () => {
         />
         <label for="file">
         <S.StyledFileInput>
-        <S.AttachmentButton>📂 FILE </S.AttachmentButton>
+        <S.AttachmentButton>Upload File</S.AttachmentButton>
         </S.StyledFileInput>
         </label>
         <S.UploadFile

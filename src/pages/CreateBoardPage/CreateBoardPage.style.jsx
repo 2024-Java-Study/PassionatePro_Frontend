@@ -42,12 +42,9 @@ export const StyledFileInput = styled.div`
 `;
 
 export const AttachmentButton = styled.div`
-  width: fit-content;
-  padding: 12px;
-  // background-color: #7e7e7e;
+  padding: 6px;
   background-color: lightGray;
-  border-radius: 12px;
-  color: gray;
+  color: #7e7e7e;
   font-weight: bold;
   cursor: pointer;
   font-size: 13px;
