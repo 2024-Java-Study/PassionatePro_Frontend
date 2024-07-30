@@ -10,13 +10,41 @@ export const Comment = styled.div`
 
 export const CommentHeader = styled.div`
     display: flex;
-    margin: 5px 5px 8px 5px;
+    margin: 0 5px 10px 5px;
 `;
 export const WriterProfile = styled.img`
     width: 30px;
     height: 30px;
+    margin-right: 10px;
 `;
 export const WriterName = styled.div`
+    margin-left: 10px;
+`;
+
+export const KebabButton = styled.div`
+`;
+
+export const KebabButtonIcon = styled.img`
+    margin-left: auto;
+    margin-right: 10px;
+    width: 15px;
+    height: 15px;
+`;
+
+export const Menu = styled.div`
+    // margin-left: 0;
+    margin-right: 10px;
+    height: 15px;
+`;
+
+export const KebabMenu = styled.ul`
+    list-style: none;
+`;
+
+export const KebabList = styled.li`
+    border: 1px solid gray;
+    font-size: small;
+    padding: 5px;
 `;
 
 export const CommentContent = styled.div`

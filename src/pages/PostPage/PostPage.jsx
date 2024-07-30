@@ -10,7 +10,7 @@ const PostPage = () => {
 
     const location = useLocation();
     const post = location.state?.board;
-    
+
     useEffect(() => {
         try {
             setData(null);
@@ -34,7 +34,7 @@ const PostPage = () => {
         }
     }, []);
 
-    const Comments = ({comments}) =>  ( 
+    const Comments = ({comments}) =>  (
         <S.Comments>
         { comments.map((comment) => (
             <S.CommentWithReplies> 
