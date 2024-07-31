@@ -25,6 +25,7 @@ const PostPage = () => {
                     }
                 );
                 setData(result.data);
+                // todo: store에 현재 post.id 값 저장하기, 페이지 벗어나면 삭제는 어떻게 할까?
             };
             PostReadAPI(post);
         } catch (e) {
