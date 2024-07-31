@@ -5,6 +5,8 @@ import {
   LoginPage,
   SignUpPage,
   PostPage,
+  MyPage
+  UpdateBoardPage,
 } from "./pages";
 
 const router = createBrowserRouter([
@@ -28,6 +30,13 @@ const router = createBrowserRouter([
   {
     path: "/boards",
     element: <PostPage />,
+  },
+  {
+    path: "/members/me",
+    element: <MyPage />
+  }
+    path: "/boards/update",
+    element: <UpdateBoardPage />,
   },
 ]);
 

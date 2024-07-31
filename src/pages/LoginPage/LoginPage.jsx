@@ -35,13 +35,10 @@ const LoginPage = () => {
       )
       .then((result) => {
         console.log(result);
-        console.log(username);
-        console.log(password);
         window.alert("로그인 성공");
+        
       })
       .catch((error) => {
-        console.log(username);
-        console.log(password);
         window.alert("로그인 실패");
         console.log(error);
       });

@@ -3,6 +3,9 @@ import { useNavigate, useLocation } from "react-router-dom";
 import * as S from "./Header.style";
 
 const Header = () => {
+  
+  // console.log(user);
+
   const navigate = useNavigate();
 
   const handleNavBarClick = (path) => {
@@ -45,7 +48,17 @@ const Header = () => {
         </S.RightSectionNav>
       </S.LeftSection>
       <S.RightSection>
-        <S.Navbar>로그아웃</S.Navbar>
+        <S.ProfileButton
+          onClick={() => handleNavBarClick("/members/me")}>
+          MyPage
+        </S.ProfileButton>
+      {/* {user? <S.Navbar>로그아웃</S.Navbar> :
+        <S.Navbar
+        onClick={()=> handleNavBarClick("/members/login")}>
+        로그인</S.Navbar>} */}
+        <S.Navbar
+        onClick={()=> handleNavBarClick("/members/login")}>
+        로그인</S.Navbar>
       </S.RightSection>
     </S.Header>
   );

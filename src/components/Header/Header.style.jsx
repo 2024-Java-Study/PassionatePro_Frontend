@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import profileImage from "../../assets/images/default_profile.png"
 
 export const Header = styled.div`
   display: flex;
@@ -35,6 +36,17 @@ export const Navbar = styled.button`
   font-family: "Inter-ExtraBold";
   font-weight: bold;
   padding: 0 00px 0 40px;
+`;
+
+export const ProfileButton = styled.button`
+  background-color: white;
+  outline: none;
+  border: none;
+  cursor: pointer;
+
+  font-weight: bold;
+  font-size: 23px;
+  padding: 0 0px 0 40px;
 `;
 
 export const RightSection = styled.div`
