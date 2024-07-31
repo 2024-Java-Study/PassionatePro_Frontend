@@ -25,6 +25,12 @@ export const Line = styled.hr`
 export const Comments = styled.div`
 `;
 
+export const CommentWithReplies = styled.div`
+`;
+
+export const Replies = styled.div`
+`;
+
 export const CommentBox = styled.div`
   background-color: #ced4da;
   border: 1px solid #ced4da;

@@ -13,41 +13,28 @@ const PostHeader = ({postInfo}) => {
             </S.PostInfo>
         </S.PostHeader>
     );
+    // Todo: title 옆에 수정 삭제 버튼
 };
 
-const PostImages = ({images}) => {
-    console.log("size: "+images.length);
-    images.map((url) => {
-        console.log(url);
-    });
-    images.map((url) => {
-        return (<S.PostImage src={url}></S.PostImage>);
-});
-};
-
-const urlList = [
-    "https://passionate-pro-bucket.s3.ap-northeast-2.amazonaws.com/test/445f45fe-6ed1-436a-beea-5ad5e3fe986f.png",
-    "https://passionate-pro-bucket.s3.ap-northeast-2.amazonaws.com/test/f3b9911c-9e39-40f0-af7b-7343b7e9a5a1.png",
-    "https://passionate-pro-bucket.s3.ap-northeast-2.amazonaws.com/test/979c6e01-b102-49ec-bdaf-85b43d0dd9ac.png"
-];
-
-const PostContainer = ({post}) => (
-    <S.PostContainer>
+const PostContainer = ({post}) => {
+    const containFiles = post.urlList.length > 0;
+    return (<S.PostContainer>
         <S.PostContent>{post.content}</S.PostContent>
+        { containFiles && 
         <S.PostImages>
-            {/* {post.urlList.map((url) => ( */}
-            {urlList.map((url) => (
-                    <S.PostImage src={url}></S.PostImage>
-            ))}
-        </S.PostImages>
-    </S.PostContainer>
-);
+            {post.urlList.map((url) => (
+                <S.PostImage src={url}></S.PostImage>
+             ))}
+        </S.PostImages> 
+        }
+    </S.PostContainer>);
+};
 
 const Post = ({post}) => {
    return (
         <S.Post>
-            <PostHeader postInfo={{title: post.title, username: post.username, date: post.date}}/>
-            <PostContainer post={{content: post.content}} />
+            <PostHeader postInfo={{title: post.title, username: post.username, date: post.createdAt}}/>
+            <PostContainer post={{content: post.content, urlList: post.urlList}} />
         </S.Post>
     );
 };
