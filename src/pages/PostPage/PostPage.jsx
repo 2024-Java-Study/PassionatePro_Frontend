@@ -25,7 +25,6 @@ const PostPage = () => {
                     }
                 );
                 setData(result.data);
-                // console.log(result.data.response);
             };
             PostReadAPI(post);
         } catch (e) {
@@ -63,7 +62,7 @@ const PostPage = () => {
                 <S.Line></S.Line>
                 <S.CommentBox>
                     <Comments comments={data.response.comments}></Comments>
-                    <CommentInput></CommentInput>
+                    <CommentInput postId={post.id}></CommentInput>
                 </S.CommentBox>
             </S.PageBox>
             }

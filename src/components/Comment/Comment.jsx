@@ -8,8 +8,8 @@ const addImage = url => {
 }
 
 const addMarginLeft = stage => {
-    if (stage==0) return 0;
-    else if (stage==1) return 50;
+    if (stage===0) return 0;
+    else if (stage===1) return 50;
 }
 
 const Comment = ({ comment, stage }) => {
