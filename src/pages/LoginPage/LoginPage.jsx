@@ -13,6 +13,8 @@ const LoginPage = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     loginAPI(loginInfo.username, loginInfo.password);
+    localStorage.setItem("username", loginInfo.username);
+
     navigate("/");
   };
 
