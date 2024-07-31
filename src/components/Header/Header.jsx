@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import * as S from "./Header.style";
+import Logout from "../Logout";
 
 const Header = () => {
 
@@ -9,6 +10,10 @@ const Header = () => {
   const handleNavBarClick = (path) => {
     navigate(path);
   };
+
+  const handleLogoutClick = (e) => {
+    Logout();
+  }
 
   const username = localStorage.getItem("username");
   const location = useLocation();
@@ -54,7 +59,8 @@ const Header = () => {
         { username ?
         <S.IsLogIn>
           <S.Navbar> {username} </S.Navbar>
-          <S.Navbar>로그아웃</S.Navbar>
+          <S.Navbar onClick={() => handleLogoutClick()}>
+            로그아웃</S.Navbar>
         </S.IsLogIn> :
         <S.Navbar
         onClick={()=> handleNavBarClick("/members/login")}>
