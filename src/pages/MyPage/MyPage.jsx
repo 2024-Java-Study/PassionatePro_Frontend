@@ -55,33 +55,10 @@ const MyPage = () => {
 
     const handleProfileImage = (e) => {
         e.preventDefault();
-    
-        const formData = new FormData();
-        formData.append("image", file[0]);
 
-        changeProfileImage(formData);
+        console.log("handleProfileImage");
+        ProfileImage(file[0]);
       };
-
-    const changeProfileImage = (formData) => {
-        console.log("프로필 사진 수정 시도");
-        const API = process.env.REACT_APP_API_URL + "/members/profiles";
-        
-        axios
-            .put(API, formData, {
-            withCredentials: true,
-            headers: {
-                "Content-Type": "multipart/form-data",
-            },
-        })
-        .then((result) => {
-            console.log(result);
-            console.log("프로필 사진 수정에 성공하였습니다.");
-        })
-        .catch((error) => {
-            console.log(error);
-            console.log("프로필 사진 수정에 실패하였습니다.");
-        })
-    }
 
     useEffect(() => {
         getMyProfile();
@@ -117,8 +94,6 @@ const MyPage = () => {
                     </S.Tbody>
                 </S.Table>
                 <S.ButtonSection>
-                    {/* <S.ProfileButton
-                    onClick={changeProfileImage}>프로필 수정</S.ProfileButton> */}
                     <label for="file">
                         <S.StyledFileInput>
                             <S.AttachmentButton>수정하기</S.AttachmentButton>
