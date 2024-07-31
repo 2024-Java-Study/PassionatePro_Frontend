@@ -21,6 +21,7 @@ const ProfileImage = async (file) => {
     .then((result) => {
         console.log(result);
         console.log("프로필 사진 수정에 성공하였습니다.");
+        window.location.reload();
     })
     .catch((error) => {
         console.log(error);

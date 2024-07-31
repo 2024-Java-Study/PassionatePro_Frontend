@@ -68,8 +68,8 @@ export const Button = styled.button`
 export const ProfileImage = styled.div`
 
   // background-image: url(${profileImage});
-  width: 70px;
-  height: 70px;
+  width: 100px;
+  height: 100px;
   background-size: cover;
   background-image: no-repeat;
 `;
