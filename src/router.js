@@ -6,6 +6,7 @@ import {
   SignUpPage,
   PostPage,
   MyPage
+  UpdateBoardPage,
 } from "./pages";
 
 const router = createBrowserRouter([
@@ -34,6 +35,9 @@ const router = createBrowserRouter([
     path: "/members/me",
     element: <MyPage />
   }
+    path: "/boards/update",
+    element: <UpdateBoardPage />,
+  },
 ]);
 
 export default router;

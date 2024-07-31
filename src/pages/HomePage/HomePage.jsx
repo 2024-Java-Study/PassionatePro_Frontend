@@ -18,16 +18,39 @@ const HomePage = () => {
       .then((result) => {
         console.log(result);
         setResult(result);
-        console.log("성공");
+        console.log("전체 게시물 조회 성공");
       })
       .catch((error) => {
         console.log(error);
-        console.log("실패");
+        console.log("전체 게시물 조회 실패");
       });
   };
 
+  const searchTitleAPI = async (title) => {
+    const API = process.env.REACT_APP_API_URL + "/boards/search";
+
+    await axios
+      .get(API, {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        params: { title: title },
+      })
+      .then((result) => {
+        console.log(result);
+        setResult(result);
+        console.log("게시물 제목 조회 성공");
+      })
+      .catch((error) => {
+        console.log(error);
+        console.log("게시물 제목 조회 실패");
+      });
+  }
+
   const [result, setResult] = useState();
   const [searchInfo, setSearchInfo] = useState("");
+
   const onChangeSearchInfo = (e) => {
     setSearchInfo(e.target.value);
   };
@@ -74,7 +97,9 @@ const HomePage = () => {
                 value={searchInfo}
                 placeholder="search..."
               ></S.InputSection>
-              <S.SearchIcon alt="search icon"></S.SearchIcon>
+              <S.SearchIcon alt="search icon"
+                onClick={() => searchTitleAPI(searchInfo)}
+              ></S.SearchIcon>
             </S.SearchSectionContent>
             <S.SearchLine></S.SearchLine>
           </S.SearchSection>
