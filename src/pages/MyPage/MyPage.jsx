@@ -6,6 +6,8 @@ import profileImageAssets from "../../assets/images/default_profile.png";
 
 const MyPage = () => {
 
+    const isDisableAPI = useRef(false);
+
     const [result, setResult] = useState();
     const [profile, setProfile] = useState(profileImageAssets);
 
@@ -56,7 +58,7 @@ const MyPage = () => {
     const handleProfileImage = (e) => {
         e.preventDefault();
 
-        console.log("handleProfileImage");
+        if (!file) return;
         ProfileImage(file[0]);
       };
 
@@ -67,6 +69,7 @@ const MyPage = () => {
     useEffect(() => {
         if (result && result.data.response.profile != null) {
             setProfile(result.data.response.profile);
+            isDisableAPI.current = true;
         }
         }, [result])
 
