@@ -1,21 +1,28 @@
 import * as S from "./Board.style";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Board = ({ board }) => {
+  const navigate = useNavigate();
+  
+  localStorage.removeItem("postId");
+
+  const moveToPostPage = () => {
+    localStorage.setItem("postId", board.id);
+    navigate("/boards");
+  };
+
   return (
-    <Link to="/boards" state={{ board }} style={{ textDecoration: "none" }}>
-      <S.Board key={board.id}>
-        <S.Title> {board.title}</S.Title>
-        <S.Content>{board.content}</S.Content>
-        <S.Detail>
-          <S.Username>{board.username}</S.Username>
-          <S.Date>
-            {"· "}
-            {board.createdAt}
-          </S.Date>
-        </S.Detail>
-      </S.Board>
-    </Link>
+    <S.Board key={board.id} onClick={moveToPostPage}>
+      <S.Title> {board.title}</S.Title>
+      <S.Content>{board.content}</S.Content>
+      <S.Detail>
+        <S.Username>{board.username}</S.Username>         
+        <S.Date>
+          {"· "}
+          {board.createdAt}
+        </S.Date>
+      </S.Detail>
+    </S.Board>
   );
 };
 

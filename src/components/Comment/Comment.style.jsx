@@ -29,6 +29,7 @@ export const KebabButtonIcon = styled.img`
     margin-right: 10px;
     width: 15px;
     height: 15px;
+    cursor: pointer;
 `;
 
 export const Menu = styled.div`
@@ -45,6 +46,7 @@ export const KebabList = styled.li`
     border: 1px solid gray;
     font-size: small;
     padding: 5px;
+    cursor: pointer;
 `;
 
 export const CommentContent = styled.div`

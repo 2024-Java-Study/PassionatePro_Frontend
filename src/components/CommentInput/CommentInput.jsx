@@ -1,6 +1,5 @@
 import * as S from "./CommentInput.style";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const CommentInput = (postId) => {
@@ -9,12 +8,10 @@ const CommentInput = (postId) => {
         content: "",
     });
 
-    const navigate = useNavigate();
-
     const handleSubmit = (e) => {
         e.preventDefault();
         commentCreateAPI(commentInfo.postId, commentInfo.content);
-        navigate("/boards");
+        window.location.reload();
     };
 
     const onChangeInfo = (e) => {

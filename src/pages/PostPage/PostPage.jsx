@@ -8,15 +8,14 @@ const PostPage = () => {
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
 
-    const location = useLocation();
-    const post = location.state?.board;
+    const postId = localStorage.getItem("postId");
 
     useEffect(() => {
         try {
             setData(null);
             setError(null);
             const PostReadAPI = async () => {
-                const API = process.env.REACT_APP_API_URL + "/boards/" + post.id;
+                const API = process.env.REACT_APP_API_URL + "/boards/" + postId;
                 const result = await axios.get(
                     API, 
                     { 
@@ -25,9 +24,8 @@ const PostPage = () => {
                     }
                 );
                 setData(result.data);
-                // todo: store에 현재 post.id 값 저장하기, 페이지 벗어나면 삭제는 어떻게 할까?
             };
-            PostReadAPI(post);
+            PostReadAPI();
         } catch (e) {
             setError(e);
             console.log(error);
@@ -59,11 +57,11 @@ const PostPage = () => {
             <S.HeaderLine></S.HeaderLine>
             { data && 
             <S.PageBox>
-                <Post key={post.id} post={ data.response }></Post>
+                <Post key={postId} post={ data.response }></Post>
                 <S.Line></S.Line>
                 <S.CommentBox>
                     <Comments comments={data.response.comments}></Comments>
-                    <CommentInput postId={post.id}></CommentInput>
+                    <CommentInput postId={postId}></CommentInput>
                 </S.CommentBox>
             </S.PageBox>
             }
