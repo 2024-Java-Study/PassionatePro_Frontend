@@ -2,6 +2,7 @@ import defaultProfile from '../../assets/images/default_profile.png';
 import kebabIcon from '../../assets/images/menu_kebab.png';
 import * as S from "./Comment.style";
 import React, { useState, useRef } from "react";
+import { ReplyInput } from "../";
 
 const addImage = url => {
     return url == null? defaultProfile : url;
@@ -20,6 +21,7 @@ const Comment = ({ comment, stage }) => {
 
     const username = localStorage.getItem("username");
     const menuRef = useRef<HTMLDivElement>(null);
+    // const replyRef = useRef<HTMLDivElement>(null);
 
     const handleKebabToggle = () => {
         setIsKebabOpen((prevValue) => !prevValue);
@@ -43,12 +45,20 @@ const Comment = ({ comment, stage }) => {
         setReplyModalOpen((prevValue) => !prevValue);
     };
 
+    // const handleReplyModalClose = (e) => {
+    //     if (!replyRef.current?.contains(e.relatedTarget)) {
+    //         setReplyModalOpen(false);
+    //     }
+    // }
+
     const Menu = () => (
         <S.Menu ref={{menuRef}}>
             <S.KebabMenu>
-                <S.KebabList onClick={() => (handleReplyModalToggle(), setIsKebabOpen(false))}>
-                    답글 작성하기
-                </S.KebabList>
+                { stage===0 && 
+                    <S.KebabList onMouseDown={() => (handleReplyModalToggle(), setIsKebabOpen(false))}>
+                        답글 작성하기
+                    </S.KebabList>
+                }
                 <S.KebabList onClick={() => (handleModifyModalToggle(), setIsKebabOpen(false))}>
                     수정하기
                 </S.KebabList>
@@ -59,7 +69,7 @@ const Comment = ({ comment, stage }) => {
         </S.Menu>
     );
 
-    return (
+    return ( <S.ReplyToggleContainer>
         <S.Comment key={comment.commentId} style={{marginLeft: addMarginLeft(stage)}}>
             <S.CommentHeader>
                 <S.WriterProfile src={addImage(comment.writerProfile)}/>
@@ -71,7 +81,14 @@ const Comment = ({ comment, stage }) => {
             <S.CommentContent>{comment.content}</S.CommentContent>
             <S.CommentDate>{comment.createdAt}</S.CommentDate>
         </S.Comment>
-    );
+         {/* 개선사항: 답글 입력창의 외부 누르면 지우기. */}
+        {/* <S.ReplyToggle ref={{replyRef}} onBlur={handleReplyModalClose} > */}
+        <S.ReplyToggle>
+            { isReplyModalOpen && (
+                <ReplyInput commentId={comment.commentId}></ReplyInput>
+            )}
+        </S.ReplyToggle>
+    </S.ReplyToggleContainer>);
 }
 
 export default Comment;
