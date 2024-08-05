@@ -3,6 +3,7 @@ import { Header, PageLayout, ProfileImage } from "../../components";
 import { useEffect, useState, useRef, useCallback } from "react";
 import axios from "axios";
 import profileImageAssets from "../../assets/images/default_profile.png";
+import Quit from "../../components/Quit/Quit";
 
 const MyPage = () => {
 
@@ -53,10 +54,14 @@ const MyPage = () => {
         })
     }
 
+    const handleQuitMember = (e) => {
+        e.preventDefault();
+        Quit();
+
+    }
+
     const handleProfileImage = (e) => {
         e.preventDefault();
-
-        console.log("handleProfileImage");
         ProfileImage(file[0]);
       };
 
@@ -108,7 +113,7 @@ const MyPage = () => {
                         onChange={onChangeFile}
                     /> {fileName?
                         <S.AttachedFile className="file-name">{fileName}</S.AttachedFile> : ""}                
-                    <S.Button>탈퇴하기</S.Button>
+                    <S.Button onClick={handleQuitMember}>탈퇴하기</S.Button>
                     <S.Button onClick={handleProfileImage}>완료</S.Button>
                 </S.ButtonSection>
             </S.Content>
