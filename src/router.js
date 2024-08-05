@@ -8,10 +8,10 @@ import {
   MyPage,
   UpdateBoardPage,
 } from "./pages";
+import PublicRoute from "./PublicRoute";
 import PrivateRoute from "./PrivateRoute";
-import AuthGuardLayout from "./AuthGuardLayout";
 
-const isLogin = Boolean(localStorage.getItem("username"));
+const isLogin = localStorage.getItem("username");
 
 const routerData = [
   {
@@ -63,18 +63,12 @@ const router = createBrowserRouter(
     if (!router.withAuth) {
         return {
           path: router.path,
-          // element: <AuthGuardLayout access={isLogin} />,
-          // element: <AuthGuardLayout access={isLogin}>{router.element}</AuthGuardLayout>
-          // element: <PrivateRoute>{router.element}</PrivateRoute>,
-          element: router.element,
+          element: <PublicRoute access={isLogin} component={router.element}/>,
         };
       } else {
         return {
           path: router.path,
-          element: router.element,
-          // element: <PrivateRoute access={isLogin}></PrivateRoute>,
-          // element: <PrivateRoute access={isLogin}>{router.element}</PrivateRoute>,
-
+          element: <PrivateRoute access={isLogin} component={router.element}/>,
         }
       }
   })

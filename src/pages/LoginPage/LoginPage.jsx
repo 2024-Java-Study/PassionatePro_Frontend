@@ -38,6 +38,7 @@ const LoginPage = () => {
       .then((result) => {
         console.log(result);
         window.alert("로그인 성공");
+        window.location.reload();
         
       })
       .catch((error) => {

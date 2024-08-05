@@ -1,11 +1,7 @@
-import { Navigate, Outlet } from "react-router-dom";
-import HomePage from "./App";
-import router from "./router";
+import { Navigate } from "react-router-dom";
 
-const PrivateRoute = ({access}) => {
-  console.log("접속");
-  console.log(access);
-  return access ? <Outlet /> : <Navigate to="/members/login" />;
-  // return isLogin ? <Navigate to="/members/login" /> : <Outlet />;
+const PrivateRoute = ({access, component}) => {
+
+    return access ? component : <Navigate to="/members/login" /> ;
 };
 export default PrivateRoute;
