@@ -12,11 +12,13 @@ const Logout = () => {
     })
     .then((result) => {
         console.log(result);
-        console.log("로그아웃에 성공하였습니다.");
+        window.alert("로그아웃 성공");
+        localStorage.removeItem('username')
+        window.location.reload();
     })
     .catch((error) => {
         console.log(error);
-        console.log("로그아웃에 실패하였습니다.");
+        window.alert("로그아웃 실패");
     })
 };
 
