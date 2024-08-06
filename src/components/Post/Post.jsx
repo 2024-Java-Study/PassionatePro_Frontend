@@ -1,20 +1,13 @@
-import DeletePost from "../DeletePost/DeletePost";
 import * as S from "./Post.style";
 
-const DeletePostButton = ( id ) => {
-    console.log("키 값");
-    console.log(id);
-    // DeletePost(id);
-}
-
-const PostHeader = ({id, postInfo}) => {
+const PostHeader = ({postInfo}) => {
     return (
         <S.PostHeader>
             <S.TitileAndButton>
                 <S.PostTitle>{postInfo.title}</S.PostTitle>
                 <S.Buttons>
                     <S.UpdateButton />
-                    <S.DeleteButton onClick={DeletePostButton(id)}/>
+                    <S.DeleteButton />
                 </S.Buttons>
             </S.TitileAndButton>
             <S.PostInfo>
@@ -42,10 +35,10 @@ const PostContainer = ({post}) => {
     </S.PostContainer>);
 };
 
-const Post = ({id, post}) => {
+const Post = ({post}) => {
    return (
         <S.Post>
-            <PostHeader id={id} postInfo={{ title: post.title, username: post.username, date: post.createdAt}} />
+            <PostHeader postInfo={{title: post.title, username: post.username, date: post.createdAt}}/>
             <PostContainer post={{content: post.content, urlList: post.urlList}} />
         </S.Post>
     );
