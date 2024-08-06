@@ -66,7 +66,8 @@ const CommentInput = (command) => {
 
     return (
         <S.CommentInput>
-            <S.Text>댓글</S.Text>
+            {commentInfo.command===0 && <S.Text>댓글</S.Text>}
+            {commentInfo.command===1 && <S.Text>수정</S.Text>}
             <S.InputBox 
                 name="content"
                 onChange={onChangeInfo}

@@ -3,6 +3,7 @@ import kebabIcon from '../../assets/images/menu_kebab.png';
 import * as S from "./Comment.style";
 import React, { useState, useRef } from "react";
 import { CommentInput, ReplyInput } from "../";
+import axios from 'axios';
 
 const addImage = url => {
     return url == null? defaultProfile : url;
@@ -42,7 +43,11 @@ const Comment = ({comment, stage }) => {
     };
  
     const handleCommentDeleteModalToggle = () => {
-        setCommentDeleteModalOpen((prevValue) => !prevValue);
+        if(window.confirm("정말 댓글을 삭제하시겠습니까?")) {
+            CommentDeleteAPI(comment.commentId);
+        } else {
+            alert("댓글 삭제 취소");
+        }
     };
 
     const handleReplyModifyModalToggle = () => {
@@ -50,7 +55,11 @@ const Comment = ({comment, stage }) => {
     };
  
     const handleReplyDeleteModalToggle = () => {
-        setReplyDeleteModalOpen((prevValue) => !prevValue);
+        if(window.confirm("정말 답글을 삭제하시겠습니까?")) {
+            ReplyDeleteAPI(comment.replyId);
+        } else {
+            alert("답글 삭제 취소");
+        }
     };
 
     const handleReplyCreateModalToggle = () => {
@@ -63,7 +72,47 @@ const Comment = ({comment, stage }) => {
     //     }
     // }
 
-    const Menu = () => (
+    const CommentDeleteAPI = (id) => {
+        const API = process.env.REACT_APP_API_URL + "/comments/" + id;
+        axios.delete( API,
+            { 
+                withCredentials: true,
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                }
+            }
+        ).then((result) => {
+            console.log(result);
+            window.alert("댓글이 삭제되었습니다.");
+            window.location.reload();
+        }).catch((error) => {
+            window.alert("댓글 삭제 실패");
+            console.log(error);
+        });
+    };
+
+    const ReplyDeleteAPI = (id) => {
+        const API = process.env.REACT_APP_API_URL + "/replies/" + id;
+        axios.delete( API,
+            { 
+                withCredentials: true,
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                }
+            }
+        ).then((result) => {
+            console.log(result);
+            window.alert("댓글이 삭제되었습니다.");
+            window.location.reload();
+        }).catch((error) => {
+            window.alert("댓글 삭제 실패");
+            console.log(error);
+        });
+    };
+
+    const Menu = ({writer}) => (
         <S.Menu ref={{menuRef}}>
             { stage===0 && 
                 <S.KebabMenu>
@@ -73,17 +122,17 @@ const Comment = ({comment, stage }) => {
                     <S.KebabList onMouseDown={() => (handleCommentModifyModalToggle(), setIsKebabOpen(false))}>
                         댓글 수정하기
                     </S.KebabList>
-                    <S.KebabList onClick={() => (handleCommentDeleteModalToggle(), setIsKebabOpen(false))}>
+                    <S.KebabList onMouseDown={() => (handleCommentDeleteModalToggle(), setIsKebabOpen(false))}>
                         댓글 삭제하기
                     </S.KebabList>
                 </S.KebabMenu>
             }
-            { stage===1 && 
+            { (stage===1 && username===writer) && 
                 <S.KebabMenu>
                     <S.KebabList onMouseDown={() => (handleReplyModifyModalToggle(), setIsKebabOpen(false))}>
                         답글 수정하기
                     </S.KebabList>
-                    <S.KebabList onClick={() => (handleReplyDeleteModalToggle(), setIsKebabOpen(false))}>
+                    <S.KebabList onMouseDown={() => (handleReplyDeleteModalToggle(), setIsKebabOpen(false))}>
                         답글 삭제하기
                     </S.KebabList>
                 </S.KebabMenu>
@@ -98,7 +147,7 @@ const Comment = ({comment, stage }) => {
                 <S.WriterName>{comment.username}</S.WriterName>
                 {/* {isKebabOpen? <Menu/>: <S.KebabButtonIcon src={ kebabIcon } onClick={handleKebabToggle} onBlur={handleKebabClose}></S.KebabButtonIcon>} */}
                 <S.KebabButtonIcon src={ kebabIcon } onClick={handleKebabToggle} onBlur={handleKebabClose} tabIndex={0}></S.KebabButtonIcon>
-                {isKebabOpen && <Menu/>}
+                {isKebabOpen && <Menu writer={comment.username}/>}
             </S.CommentHeader>
             <S.CommentContent>{comment.content}</S.CommentContent>
             <S.CommentDate>{comment.createdAt}</S.CommentDate>
