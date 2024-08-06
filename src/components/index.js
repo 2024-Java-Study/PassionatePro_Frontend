@@ -9,3 +9,4 @@ export { default as ProfileImage } from "./ProfileImage";
 export { default as Logout } from "./Logout";
 export { default as Quit } from "./Quit";
 export { default as DeletePost } from "./DeletePost";
+
