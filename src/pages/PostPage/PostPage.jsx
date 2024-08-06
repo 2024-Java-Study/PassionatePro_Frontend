@@ -57,7 +57,7 @@ const PostPage = () => {
             <S.HeaderLine></S.HeaderLine>
             { data && 
             <S.PageBox>
-                <Post key={postId} post={ data.response }></Post>
+                <Post key={postId} id={postId} post={ data.response } ></Post>
                 <S.Line></S.Line>
                 <S.CommentBox>
                     <Comments comments={data.response.comments}></Comments>
