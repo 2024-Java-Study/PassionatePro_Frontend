@@ -5,7 +5,7 @@ import {
   LoginPage,
   SignUpPage,
   PostPage,
-  MyPage,
+  MyPage, 
   UpdateBoardPage,
 } from "./pages";
 import PublicRoute from "./PublicRoute";
@@ -50,7 +50,7 @@ const routerData = [
     withAuth: true,
     label: "마이페이지",
     element: <MyPage />
-  },
+  }, 
   {
     path: "/boards/update",
     element: <UpdateBoardPage />,

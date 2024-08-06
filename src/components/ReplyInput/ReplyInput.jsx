@@ -1,33 +1,33 @@
-import * as S from "./CommentInput.style";
+import * as S from "./ReplyInput.style";
 import { useState } from "react";
 import axios from "axios";
 
-const CommentInput = (command) => {
+const ReplyInput = (command) => {
 
-    const [commentInfo, setCommentInfo] = useState({
-        id: command.command.id,
+    const [replyInfo, setReplyInfo] = useState({
+        id: command.command.id, 
         command: command.command.flag, 
-        content: "",
+        content: command.command.content,
     });
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (commentInfo.command===0) commentCreateAPI(commentInfo.id, commentInfo.content);
-        if (commentInfo.command===1) commentModifyAPI(commentInfo.id, commentInfo.content);
+        if (replyInfo.command===0) replyCreateAPI(replyInfo.id, replyInfo.content);
+        if (replyInfo.command===1) replyModifyAPI(replyInfo.id, replyInfo.content);
         window.location.reload();
     };
 
     const onChangeInfo = (e) => {
-        setCommentInfo({
-            ...commentInfo,
+        setReplyInfo({
+            ...replyInfo,
             [e.target.name]: e.target.value,
         });
     };
 
-    const commentCreateAPI = (postId, content) => {
-        const API = process.env.REACT_APP_API_URL + "/comments";
+    const replyCreateAPI = (commentId, content) => {
+        const API = process.env.REACT_APP_API_URL + "/replies";
         axios.post( API,
-            { boardId: postId, content: content },
+            { commentId: commentId, content: content },
             { 
                 withCredentials: true,
                 headers: {
@@ -44,8 +44,9 @@ const CommentInput = (command) => {
         });
     };
 
-    const commentModifyAPI = (commentId, content) => {
-        const API = process.env.REACT_APP_API_URL + "/comments/" + commentId;
+    const replyModifyAPI = (replyId, content) => {
+        const API = process.env.REACT_APP_API_URL + "/replies/" + replyId;
+        console.log(command);
         axios.put( API,
             { content: content },
             { 
@@ -57,26 +58,27 @@ const CommentInput = (command) => {
             }
         ).then((result) => {
             console.log(result);
-            window.alert("댓글이 수정되었습니다.");
+            window.alert("답글이 수정되었습니다.");
         }).catch((error) => {
-            window.alert("댓글 수정 실패");
+            window.alert("답글 수정 실패");
             console.log(error);
         });
     };
 
+    console.log(replyInfo);
     return (
-        <S.CommentInput>
-            {commentInfo.command===0 && <S.Text>댓글</S.Text>}
-            {commentInfo.command===1 && <S.Text>수정</S.Text>}
+        <S.ReplyInput>
+            <S.Text>답글</S.Text>
             <S.InputBox 
                 name="content"
                 onChange={onChangeInfo}
-                value={commentInfo.content}
-                placeholder="댓글을 입력하세요..."
+                value={replyInfo.content}
+                placeholder="답글을 입력하세요..."
+                // ref={inputRef}
             />
             <S.Button onClick={handleSubmit}/>
-        </S.CommentInput>
+        </S.ReplyInput>
     );
 };
 
-export default CommentInput;
+export default ReplyInput;
