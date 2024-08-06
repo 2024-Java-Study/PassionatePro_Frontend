@@ -1,7 +1,7 @@
 import * as S from "./PostPage.style";
 import { Header, PageLayout, Post, Comment, CommentInput } from "../../components";
 import { useLocation } from "react-router-dom";
-import axios from "axios";
+import axios from "../../customAxios"
 import React, { useState, useEffect } from "react";
 
 const PostPage = () => {

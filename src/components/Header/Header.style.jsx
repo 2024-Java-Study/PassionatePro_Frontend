@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import profileImage from "../../assets/images/default_profile.png"
 
 export const Header = styled.div`
   display: flex;
@@ -50,6 +49,11 @@ export const ProfileButton = styled.button`
 `;
 
 export const RightSection = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+export const IsLogIn = styled.div`
   display: flex;
   justify-content: center;
 `;

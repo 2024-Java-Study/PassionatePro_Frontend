@@ -36,6 +36,8 @@ const LoginPage = () => {
       .then((result) => {
         console.log(result);
         window.alert("로그인 성공");
+        localStorage.setItem("username", loginInfo.username);
+        window.location.reload();
         
       })
       .catch((error) => {

@@ -1,11 +1,8 @@
-import axios from "axios";
+import axios from "../../customAxios"
 
 
 // 완료 버튼을 누르면 새 프로필 사진 리턴 (updateProfile API 호출)
 const ProfileImage = async (file) => {
-    console.log("profileImage");
-    console.log(file);
-
     const formData = new FormData();
     formData.append("image", file);
 
