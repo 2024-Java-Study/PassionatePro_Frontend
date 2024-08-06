@@ -7,7 +7,7 @@ const ReplyInput = (command) => {
     const [replyInfo, setReplyInfo] = useState({
         id: command.command.id, 
         command: command.command.flag, 
-        content: "",
+        content: command.command.content,
     });
 
     const handleSubmit = (e) => {
@@ -46,6 +46,7 @@ const ReplyInput = (command) => {
 
     const replyModifyAPI = (replyId, content) => {
         const API = process.env.REACT_APP_API_URL + "/replies/" + replyId;
+        console.log(command);
         axios.put( API,
             { content: content },
             { 
@@ -64,6 +65,7 @@ const ReplyInput = (command) => {
         });
     };
 
+    console.log(replyInfo);
     return (
         <S.ReplyInput>
             <S.Text>답글</S.Text>

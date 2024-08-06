@@ -104,10 +104,10 @@ const Comment = ({comment, stage }) => {
             }
         ).then((result) => {
             console.log(result);
-            window.alert("댓글이 삭제되었습니다.");
+            window.alert("답글이 삭제되었습니다.");
             window.location.reload();
         }).catch((error) => {
-            window.alert("댓글 삭제 실패");
+            window.alert("답글 삭제 실패");
             console.log(error);
         });
     };
@@ -127,7 +127,7 @@ const Comment = ({comment, stage }) => {
                     </S.KebabList>
                 </S.KebabMenu>
             }
-            { (stage===1 && username===writer) && 
+            { (stage===1) && 
                 <S.KebabMenu>
                     <S.KebabList onMouseDown={() => (handleReplyModifyModalToggle(), setIsKebabOpen(false))}>
                         답글 수정하기
@@ -144,7 +144,7 @@ const Comment = ({comment, stage }) => {
         <S.Comment key={comment.commentId} style={{marginLeft: addMarginLeft(stage)}}>
             <S.CommentHeader>
                 <S.WriterProfile src={addImage(comment.writerProfile)}/>
-                <S.WriterName>{comment.username}</S.WriterName>
+                <S.WriterName style={{color: (comment.isWriterQuit || comment.isDeleted)? '#808080': 'black'}}>{comment.username}</S.WriterName>
                 {/* {isKebabOpen? <Menu/>: <S.KebabButtonIcon src={ kebabIcon } onClick={handleKebabToggle} onBlur={handleKebabClose}></S.KebabButtonIcon>} */}
                 <S.KebabButtonIcon src={ kebabIcon } onClick={handleKebabToggle} onBlur={handleKebabClose} tabIndex={0}></S.KebabButtonIcon>
                 {isKebabOpen && <Menu writer={comment.username}/>}
