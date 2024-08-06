@@ -1,4 +1,7 @@
 import styled from "@emotion/styled";
+import updateIcon from "../../assets/images/update_icon.png";
+import deleteIcon from "../../assets/images/delete_icon.png";
+
 
 export const Post = styled.div`
     margin: 40px 10% 40px 10%;
@@ -48,4 +51,45 @@ export const PostImage = styled.img`
     margin: 0 10px 0 10px;
     width: auto;
     height: 10em;
+`;
+
+export const UpdateButton = styled.button`
+
+  margin-top: 20px;
+  margin-right: 10px;
+
+  background-image: url(${updateIcon});
+  width: 20px;
+  height: 20px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+  background-color: white;
+  cursor: pointer;
+`;
+
+export const DeleteButton = styled.button`
+
+  margin-top: 20px;
+
+  background-image: url(${deleteIcon});
+  width: 20px;
+  height: 20px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+  background-color: white;
+  cursor: pointer;
+`;
+
+
+export const TitileAndButton = styled.div`
+    display: flex;
+    justify-content: space-between;
+`;
+
+export const Buttons = styled.div`
+    display: flex;
 `;

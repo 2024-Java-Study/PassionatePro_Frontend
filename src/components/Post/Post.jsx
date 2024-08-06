@@ -3,7 +3,13 @@ import * as S from "./Post.style";
 const PostHeader = ({postInfo}) => {
     return (
         <S.PostHeader>
-            <S.PostTitle>{postInfo.title}</S.PostTitle>
+            <S.TitileAndButton>
+                <S.PostTitle>{postInfo.title}</S.PostTitle>
+                <S.Buttons>
+                    <S.UpdateButton />
+                    <S.DeleteButton />
+                </S.Buttons>
+            </S.TitileAndButton>
             <S.PostInfo>
             <S.PostWriterInfo>{postInfo.username}</S.PostWriterInfo>
             <S.PostDate>
@@ -13,7 +19,6 @@ const PostHeader = ({postInfo}) => {
             </S.PostInfo>
         </S.PostHeader>
     );
-    // Todo: title 옆에 수정 삭제 버튼
 };
 
 const PostContainer = ({post}) => {
