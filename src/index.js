@@ -7,6 +7,7 @@ import { CookiesProvider } from "react-cookie";
 // import registerServiceWorker from "./registerServiceWorker";
 import { createStore } from "redux";
 import rootReducer from "./store/modules";
+import PrivateRoute from "./PrivateRoute";
 
 const store = createStore(rootReducer);
 console.log(store.getState());

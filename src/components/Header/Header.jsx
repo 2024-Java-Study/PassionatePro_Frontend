@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import * as S from "./Header.style";
+import Logout from "../Logout";
 
 const Header = () => {
-  
-  // console.log(user);
 
   const navigate = useNavigate();
 
@@ -12,6 +11,11 @@ const Header = () => {
     navigate(path);
   };
 
+  const handleLogoutClick = (e) => {
+    Logout();
+  }
+
+  const username = localStorage.getItem("username");
   const location = useLocation();
   const [isActive, setIsActive] = useState({
     home: true,
@@ -52,13 +56,15 @@ const Header = () => {
           onClick={() => handleNavBarClick("/members/me")}>
           MyPage
         </S.ProfileButton>
-      {/* {user? <S.Navbar>로그아웃</S.Navbar> :
+        { username ?
+        <S.IsLogIn>
+          <S.Navbar> {username} </S.Navbar>
+          <S.Navbar onClick={() => handleLogoutClick()}>
+            로그아웃</S.Navbar>
+        </S.IsLogIn> :
         <S.Navbar
         onClick={()=> handleNavBarClick("/members/login")}>
-        로그인</S.Navbar>} */}
-        <S.Navbar
-        onClick={()=> handleNavBarClick("/members/login")}>
-        로그인</S.Navbar>
+        로그인</S.Navbar>}
       </S.RightSection>
     </S.Header>
   );

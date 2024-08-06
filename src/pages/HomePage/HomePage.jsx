@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Board, Header, PageLayout } from "../../components";
 import * as S from "./HomePage.style";
-import axios from "axios";
+import axios from "../../customAxios"
 import { useEffect } from "react";
 
 const HomePage = () => {
@@ -57,28 +57,7 @@ const HomePage = () => {
 
   useEffect(() => {
     findAllBoardAPI();
-    // getNickName();
   }, []);
-
-  // const getNickName = () => {
-  //   const API = process.env.REACT_APP_API_URL + "/members/profiles";
-
-  //   axios
-  //     .get(API, {
-  //       withCredentials: true,
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //     })
-  //     .then((result) => {
-  //       console.log(result);
-  //       console.log("사용자의 이름을 가져오는 데 성공하였습니다.");
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //       console.log("사용자의 정보를 가져오는 데 실패하였습니다.");
-  //     })
-  // }
 
   return (
     <S.HomePage>
