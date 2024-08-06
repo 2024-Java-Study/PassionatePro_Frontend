@@ -1,7 +1,7 @@
 import * as S from "./MyPage.style";
 import { Header, PageLayout, ProfileImage } from "../../components";
 import { useEffect, useState, useRef, useCallback } from "react";
-import axios from "axios";
+import axios from "../../customAxios"
 import profileImageAssets from "../../assets/images/default_profile.png";
 
 const MyPage = () => {

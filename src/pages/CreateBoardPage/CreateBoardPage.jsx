@@ -3,7 +3,7 @@ import { Header, PageLayout } from "../../components";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TextareaAutosize from "react-textarea-autosize";
-import axios from "axios";
+import axios from "../../customAxios"
 
 const CreateBoardPage = () => {
 

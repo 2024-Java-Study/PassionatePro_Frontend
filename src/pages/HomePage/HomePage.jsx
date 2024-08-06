@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Board, Header, PageLayout } from "../../components";
 import * as S from "./HomePage.style";
-import axios from "axios";
+import axios from "../../customAxios"
 import { useEffect } from "react";
 
 const HomePage = () => {

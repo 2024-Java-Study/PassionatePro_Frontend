@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../../customAxios"
 
 const Logout = () => {
     const API = process.env.REACT_APP_API_URL + "/members/logout";
