@@ -49,6 +49,7 @@ const routerData = [
     element: <MyPage />,
     withAuth: true,
     label: "마이페이지",
+    element: <MyPage />
   },
   {
     path: "/boards/update",
