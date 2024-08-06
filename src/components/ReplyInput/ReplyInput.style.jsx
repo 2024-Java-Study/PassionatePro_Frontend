@@ -9,12 +9,19 @@ export const ReplyInput = styled.div`
     background-color: #ced4da;
 `;
 
-export const InputBox = styled.input`
-    margin: 0 0 0 45px;
+export const Text = styled.div`
+    margin: 0 20px 0 20px;
     padding: 10px 10px 10px 10px;
+    font-weight: bold;
+    width: 30px;
+`;
+
+export const InputBox = styled.input`
+    margin: 5px 0 5px 0;
     border: none;
     flex-grow: 1;
 `;
+
 export const Button = styled.button`
     background-image: url(${triangle});
     background-size: contain;

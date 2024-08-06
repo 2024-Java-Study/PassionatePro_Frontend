@@ -2,16 +2,18 @@ import * as S from "./ReplyInput.style";
 import { useState } from "react";
 import axios from "axios";
 
-const ReplyInput = (commentId) => {
+const ReplyInput = (command) => {
 
     const [replyInfo, setReplyInfo] = useState({
-        commentId: commentId,
+        id: command.command.id, 
+        command: command.command.flag, 
         content: "",
     });
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        replyCreateAPI(replyInfo.commentId, replyInfo.content);
+        if (replyInfo.command===0) replyCreateAPI(replyInfo.id, replyInfo.content);
+        if (replyInfo.command===1) replyModifyAPI(replyInfo.id, replyInfo.content);
         window.location.reload();
     };
 
@@ -25,7 +27,7 @@ const ReplyInput = (commentId) => {
     const replyCreateAPI = (commentId, content) => {
         const API = process.env.REACT_APP_API_URL + "/replies";
         axios.post( API,
-            { commentId: commentId.commentId, content: content },
+            { commentId: commentId, content: content },
             { 
                 withCredentials: true,
                 headers: {
@@ -42,9 +44,29 @@ const ReplyInput = (commentId) => {
         });
     };
 
+    const replyModifyAPI = (replyId, content) => {
+        const API = process.env.REACT_APP_API_URL + "/replies/" + replyId;
+        axios.put( API,
+            { content: content },
+            { 
+                withCredentials: true,
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                }
+            }
+        ).then((result) => {
+            console.log(result);
+            window.alert("답글이 수정되었습니다.");
+        }).catch((error) => {
+            window.alert("답글 수정 실패");
+            console.log(error);
+        });
+    };
+
     return (
         <S.ReplyInput>
-            {/* <S.Text>댓글</S.Text> */}
+            <S.Text>답글</S.Text>
             <S.InputBox 
                 name="content"
                 onChange={onChangeInfo}

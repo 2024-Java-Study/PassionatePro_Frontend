@@ -61,7 +61,7 @@ const PostPage = () => {
                 <S.Line></S.Line>
                 <S.CommentBox>
                     <Comments comments={data.response.comments}></Comments>
-                    <CommentInput postId={postId}></CommentInput>
+                    <CommentInput command={{flag: 0, id: postId}}></CommentInput>
                 </S.CommentBox>
             </S.PageBox>
             }

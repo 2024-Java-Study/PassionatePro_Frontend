@@ -1,13 +1,8 @@
 import styled from "@emotion/styled";
 
-export const ReplyToggleContainer = styled.div`
-    // border: 1px solid #ced4da;
-    // padding: 20px 0 20px 20px;
-    // background-color: white;
-    // margin: 5px 5px 0 0;
-`;
-export const ReplyToggle = styled.div`
-`;
+export const ReplyToggleContainer = styled.div``;
+
+export const InputToggle = styled.div``;
 
 export const Comment = styled.div`
     border: 1px solid #ced4da;
