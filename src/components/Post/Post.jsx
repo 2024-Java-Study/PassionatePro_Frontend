@@ -10,7 +10,7 @@ const PostHeader = ({postInfo}) => {
             <S.TitileAndButton>
                 <S.PostTitle>{postInfo.title}</S.PostTitle>
                 <S.Buttons>
-                    <S.UpdateButton onMouseDown={() => navigate("/boards/update")}/>
+                    <S.UpdateButton />
                     <S.DeleteButton onMouseDown={() => DeletePost()}/>
                 </S.Buttons>
             </S.TitileAndButton>
@@ -21,7 +21,7 @@ const PostHeader = ({postInfo}) => {
                 {postInfo.date}
             </S.PostDate>
             </S.PostInfo>
-        </S.PostHeader>
+        </S.PostHeader>ß
     );
 };
 
