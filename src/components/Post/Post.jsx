@@ -1,3 +1,4 @@
+import DeletePost from "../DeletePost";
 import * as S from "./Post.style";
 
 const PostHeader = ({postInfo}) => {
@@ -7,7 +8,7 @@ const PostHeader = ({postInfo}) => {
                 <S.PostTitle>{postInfo.title}</S.PostTitle>
                 <S.Buttons>
                     <S.UpdateButton />
-                    <S.DeleteButton />
+                    <S.DeleteButton onMouseDown={() => DeletePost()}/>
                 </S.Buttons>
             </S.TitileAndButton>
             <S.PostInfo>
