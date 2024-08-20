@@ -39,18 +39,21 @@ const Comment = ({comment, stage }) => {
     }
 
     const handleReplyCreateModalToggle = () => {
-        if (inputModalMode===0) setInputModalMode(1);
-        else setInputModalMode(0);
+        if (inputModalMode === 0) setInputModalMode(1);
+        else if (inputModalMode === 1) setInputModalMode(0);
+        else setInputModalMode(1);
     };
 
     const handleCommentModifyModalToggle = () => {
-        if (inputModalMode===0) setInputModalMode(2);
-        else setInputModalMode(0);
+        if (inputModalMode === 0) setInputModalMode(2);
+        else if (inputModalMode === 2) setInputModalMode(0);
+        else setInputModalMode(2);
     };
 
     const handleReplyModifyModalToggle = () => {
-        if (inputModalMode===0)  setInputModalMode(3);
-        else setInputModalMode(0);
+        if (inputModalMode === 0) setInputModalMode(3);
+        else if (inputModalMode === 3)  setInputModalMode(0);
+        else setInputModalMode(3);
     };
  
     const handleCommentDeleteModalToggle = () => {
@@ -124,7 +127,7 @@ const Comment = ({comment, stage }) => {
                     </S.KebabList> }
                 </S.KebabMenu>
             }
-            { (stage===1) && 
+            { stage===1 && 
                 <S.KebabMenu>
                     { username == writer && <S.KebabList onMouseDown={() => (handleReplyModifyModalToggle(), setIsKebabOpen(false))}>
                         답글 수정하기
@@ -142,15 +145,14 @@ const Comment = ({comment, stage }) => {
             <S.CommentHeader>
                 <S.WriterProfile src={addImage(comment.profile)}/>
                 <S.WriterName style={{color: (comment.isWriterQuit || comment.isDeleted)? '#808080': 'black'}}>{comment.username}</S.WriterName>
-                {/* {isKebabOpen? <Menu/>: <S.KebabButtonIcon src={ kebabIcon } onClick={handleKebabToggle} onBlur={handleKebabClose}></S.KebabButtonIcon>} */}
-                <S.KebabButtonIcon src={ kebabIcon } onClick={handleKebabToggle} onBlur={handleKebabClose} tabIndex={0}></S.KebabButtonIcon>
-                {isKebabOpen && <Menu writer={comment.username}/>}
+                <S.KebabButton>
+                    <S.KebabButtonIcon src={ kebabIcon } onClick={handleKebabToggle} onBlur={handleKebabClose} tabIndex={0}></S.KebabButtonIcon>
+                    {isKebabOpen && <Menu writer={comment.username}/>}
+                </S.KebabButton>
             </S.CommentHeader>
             <S.CommentContent>{comment.content}</S.CommentContent>
             <S.CommentDate>{comment.createdAt}</S.CommentDate>
         </S.Comment>
-        {/* 개선사항: 답글 입력창의 외부 누르면 지우기. */}
-        {/* <S.ReplyToggle ref={{inputRef}} onBlur={handleInputModalClose} > */}
         { inputModalMode!=0 && <S.InputToggle ref={{inputRef}} onBlur={handleInputModalClose} tabIndex={0}>
             { inputModalMode===2 && (
                 <CommentInput command={{flag: 1, id: comment.commentId}}></CommentInput>
