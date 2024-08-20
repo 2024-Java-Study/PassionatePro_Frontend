@@ -143,8 +143,10 @@ const Comment = ({comment, stage }) => {
     return ( <S.ReplyToggleContainer>
         <S.Comment key={comment.commentId} style={{marginLeft: addMarginLeft(stage)}}>
             <S.CommentHeader>
-                <S.WriterProfile src={addImage(comment.profile)}/>
-                <S.WriterName style={{color: (comment.isWriterQuit || comment.isDeleted)? '#808080': 'black'}}>{comment.username}</S.WriterName>
+                <S.WriterInfo>
+                    <S.WriterProfile src={addImage(comment.profile)}/>
+                    <S.WriterName style={{color: (comment.isWriterQuit || comment.isDeleted)? '#808080': 'black'}}>{comment.username}</S.WriterName>
+                </S.WriterInfo>
                 <S.KebabButton>
                     <S.KebabButtonIcon src={ kebabIcon } onClick={handleKebabToggle} onBlur={handleKebabClose} tabIndex={0}></S.KebabButtonIcon>
                     {isKebabOpen && <Menu writer={comment.username}/>}
