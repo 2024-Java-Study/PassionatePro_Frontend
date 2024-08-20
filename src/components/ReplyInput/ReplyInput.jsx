@@ -14,7 +14,6 @@ const ReplyInput = (command) => {
         e.preventDefault();
         if (replyInfo.command===0) replyCreateAPI(replyInfo.id, replyInfo.content);
         if (replyInfo.command===1) replyModifyAPI(replyInfo.id, replyInfo.content);
-        window.location.reload();
     };
 
     const onChangeInfo = (e) => {
@@ -36,10 +35,11 @@ const ReplyInput = (command) => {
                 }
             }
         ).then((result) => {
+            window.location.reload();
             console.log(result);
-            window.alert("댓글이 작성되었습니다.");
+            window.alert("답글이 작성되었습니다.");
         }).catch((error) => {
-            window.alert("댓글 작성 실패");
+            window.alert("답글 작성 실패");
             console.log(error);
         });
     };
@@ -57,6 +57,7 @@ const ReplyInput = (command) => {
                 }
             }
         ).then((result) => {
+            window.location.reload();
             console.log(result);
             window.alert("답글이 수정되었습니다.");
         }).catch((error) => {
@@ -74,9 +75,8 @@ const ReplyInput = (command) => {
                 onChange={onChangeInfo}
                 value={replyInfo.content}
                 placeholder="답글을 입력하세요..."
-                // ref={inputRef}
             />
-            <S.Button onClick={handleSubmit}/>
+            <S.Button onMouseDown={handleSubmit}/>
         </S.ReplyInput>
     );
 };

@@ -16,18 +16,11 @@ const addMarginLeft = stage => {
 
 const Comment = ({comment, stage }) => {
     const [isKebabOpen, setIsKebabOpen] = useState(false);
-
-    const [isCommentModifyModalOpen, setCommentModifyModalOpen] = useState(false);
-    const [isReplyModifyModalOpen, setReplyModifyModalOpen] = useState(false);
-
-    const [isReplyCreateModalOpen, setReplyCreateModalOpen] = useState(false);
-
-    const [isCommentDeleteModalOpen, setCommentDeleteModalOpen] = useState(false);
-    const [isReplyDeleteModalOpen, setReplyDeleteModalOpen] = useState(false);
-
+    const [inputModalMode, setInputModalMode] = useState(0);
+ 
     const username = localStorage.getItem("username");
     const menuRef = useRef<HTMLDivElement>(null);
-    const replyRef = useRef<HTMLDivElement>(null);
+    const inputRef = useRef<HTMLDivElement>(null);
 
     const handleKebabToggle = () => {
         setIsKebabOpen((prevValue) => !prevValue);
@@ -39,8 +32,25 @@ const Comment = ({comment, stage }) => {
         }
     };
 
+    const handleInputModalClose = (e) => {
+        if (!inputRef.current?.contains(e.relatedTarget)) {
+            setInputModalMode(0);
+        }
+    }
+
+    const handleReplyCreateModalToggle = () => {
+        if (inputModalMode===0) setInputModalMode(1);
+        else setInputModalMode(0);
+    };
+
     const handleCommentModifyModalToggle = () => {
-        setCommentModifyModalOpen((prevValue) => !prevValue);
+        if (inputModalMode===0) setInputModalMode(2);
+        else setInputModalMode(0);
+    };
+
+    const handleReplyModifyModalToggle = () => {
+        if (inputModalMode===0)  setInputModalMode(3);
+        else setInputModalMode(0);
     };
  
     const handleCommentDeleteModalToggle = () => {
@@ -51,10 +61,6 @@ const Comment = ({comment, stage }) => {
         }
     };
 
-    const handleReplyModifyModalToggle = () => {
-        setReplyModifyModalOpen((prevValue) => !prevValue);
-    };
- 
     const handleReplyDeleteModalToggle = () => {
         if(window.confirm("정말 답글을 삭제하시겠습니까?")) {
             ReplyDeleteAPI(comment.replyId);
@@ -62,16 +68,6 @@ const Comment = ({comment, stage }) => {
             alert("답글 삭제 취소");
         }
     };
-
-    const handleReplyCreateModalToggle = () => {
-        setReplyCreateModalOpen((prevValue) => !prevValue);
-    };
-
-    // const handleReplyModalClose = (e) => {
-    //     if (!replyRef.current?.contains(e.relatedTarget)) {
-    //         setReplyModalOpen(false);
-    //     }
-    // }
 
     const CommentDeleteAPI = (id) => {
         const API = process.env.REACT_APP_API_URL + "/comments/" + id;
@@ -154,18 +150,18 @@ const Comment = ({comment, stage }) => {
             <S.CommentDate>{comment.createdAt}</S.CommentDate>
         </S.Comment>
         {/* 개선사항: 답글 입력창의 외부 누르면 지우기. */}
-        {/* <S.ReplyToggle ref={{replyRef}} onBlur={handleReplyModalClose} > */}
-        <S.InputToggle ref={{replyRef}} >
-            { isCommentModifyModalOpen && (
+        {/* <S.ReplyToggle ref={{inputRef}} onBlur={handleInputModalClose} > */}
+        { inputModalMode!=0 && <S.InputToggle ref={{inputRef}} onBlur={handleInputModalClose} tabIndex={0}>
+            { inputModalMode===2 && (
                 <CommentInput command={{flag: 1, id: comment.commentId}}></CommentInput>
             )}
-            { isReplyCreateModalOpen && (
+            { inputModalMode===1 && (
                 <ReplyInput command={{flag: 0, id: comment.commentId}}></ReplyInput>
             )}
-            { isReplyModifyModalOpen && (
+            { inputModalMode===3 && (
                 <ReplyInput command={{flag: 1, id: comment.replyId}}></ReplyInput>
             )}
-        </S.InputToggle>
+        </S.InputToggle> }
     </S.ReplyToggleContainer>);
 }
 
