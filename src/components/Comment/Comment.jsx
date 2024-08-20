@@ -18,11 +18,12 @@ const Comment = ({comment, stage }) => {
     const [isKebabOpen, setIsKebabOpen] = useState(false);
 
     const [isCommentModifyModalOpen, setCommentModifyModalOpen] = useState(false);
-    const [isCommentDeleteModalOpen, setCommentDeleteModalOpen] = useState(false);
-
     const [isReplyModifyModalOpen, setReplyModifyModalOpen] = useState(false);
-    const [isReplyDeleteModalOpen, setReplyDeleteModalOpen] = useState(false);
+
     const [isReplyCreateModalOpen, setReplyCreateModalOpen] = useState(false);
+
+    const [isCommentDeleteModalOpen, setCommentDeleteModalOpen] = useState(false);
+    const [isReplyDeleteModalOpen, setReplyDeleteModalOpen] = useState(false);
 
     const username = localStorage.getItem("username");
     const menuRef = useRef<HTMLDivElement>(null);
@@ -119,22 +120,22 @@ const Comment = ({comment, stage }) => {
                     <S.KebabList onMouseDown={() => (handleReplyCreateModalToggle(), setIsKebabOpen(false))}>
                         답글 작성하기
                     </S.KebabList>
-                    <S.KebabList onMouseDown={() => (handleCommentModifyModalToggle(), setIsKebabOpen(false))}>
+                    { username == writer && <S.KebabList onMouseDown={() => (handleCommentModifyModalToggle(), setIsKebabOpen(false))}>
                         댓글 수정하기
-                    </S.KebabList>
-                    <S.KebabList onMouseDown={() => (handleCommentDeleteModalToggle(), setIsKebabOpen(false))}>
+                    </S.KebabList> }
+                    { username == writer && <S.KebabList onMouseDown={() => (handleCommentDeleteModalToggle(), setIsKebabOpen(false))}>
                         댓글 삭제하기
-                    </S.KebabList>
+                    </S.KebabList> }
                 </S.KebabMenu>
             }
             { (stage===1) && 
                 <S.KebabMenu>
-                    <S.KebabList onMouseDown={() => (handleReplyModifyModalToggle(), setIsKebabOpen(false))}>
+                    { username == writer && <S.KebabList onMouseDown={() => (handleReplyModifyModalToggle(), setIsKebabOpen(false))}>
                         답글 수정하기
-                    </S.KebabList>
-                    <S.KebabList onMouseDown={() => (handleReplyDeleteModalToggle(), setIsKebabOpen(false))}>
+                    </S.KebabList> }
+                    { username == writer && <S.KebabList onMouseDown={() => (handleReplyDeleteModalToggle(), setIsKebabOpen(false))}>
                         답글 삭제하기
-                    </S.KebabList>
+                    </S.KebabList> }
                 </S.KebabMenu>
             }
         </S.Menu>
@@ -143,7 +144,7 @@ const Comment = ({comment, stage }) => {
     return ( <S.ReplyToggleContainer>
         <S.Comment key={comment.commentId} style={{marginLeft: addMarginLeft(stage)}}>
             <S.CommentHeader>
-                <S.WriterProfile src={addImage(comment.writerProfile)}/>
+                <S.WriterProfile src={addImage(comment.profile)}/>
                 <S.WriterName style={{color: (comment.isWriterQuit || comment.isDeleted)? '#808080': 'black'}}>{comment.username}</S.WriterName>
                 {/* {isKebabOpen? <Menu/>: <S.KebabButtonIcon src={ kebabIcon } onClick={handleKebabToggle} onBlur={handleKebabClose}></S.KebabButtonIcon>} */}
                 <S.KebabButtonIcon src={ kebabIcon } onClick={handleKebabToggle} onBlur={handleKebabClose} tabIndex={0}></S.KebabButtonIcon>
