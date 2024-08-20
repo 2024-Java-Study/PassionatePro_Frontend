@@ -26,11 +26,11 @@ export const WriterName = styled.div`
 `;
 
 export const KebabButton = styled.div`
+    margin-left: auto;
+    margin-right: 10px;
 `;
 
 export const KebabButtonIcon = styled.img`
-    margin-left: auto;
-    margin-right: 10px;
     width: 15px;
     height: 15px;
     cursor: pointer;
