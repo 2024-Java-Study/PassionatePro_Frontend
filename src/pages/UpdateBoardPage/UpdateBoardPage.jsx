@@ -42,26 +42,20 @@ const UpdateBoardPage = () => {
     };
   }, [inputEl, fileInputHandler]);
 
-  const [file, setFile] = useState(null);
+  const [file, setFile] = useState([]);
   const onChangeFile = (e) => {
-    setFile(e.target.files);
+
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setFile(reader.result);
+   	};
+    setFile(reader.result);
   };
 
   useEffect(() => {
     GetBoardInfo();
   }, []);
-
-  // const [isEditing, setIsEditing] = useState();
-
-  // useEffect(() => {
-  //   if (result != undefined) {
-  //     setIsEditing({
-  //       title: result.title,
-  //       content: result.content,
-  //       urlList: result.urlList,
-  //     })
-  //   }
-  // }, [result]);
 
   const GetBoardInfo = () => {
     const postId = localStorage.getItem("postId");
@@ -78,6 +72,7 @@ const UpdateBoardPage = () => {
           content: result.data.response.content,
           urlList: result.data.response.urlList,
         });
+        setFile(result.data.response.urlList);
       })
       .catch((error) => {
         console.log(error);
@@ -130,7 +125,7 @@ const UpdateBoardPage = () => {
     formData.append("content", boardInfo.content);
 
     if (file) {
-      formData.append("images", file[0]);
+      formData.append("images", file); ///
     }
     UpdateBoardAPI(formData);
     navigate("/");
