@@ -12,7 +12,10 @@ const PostContainer = ({urlList}) => {
       { containFiles && 
       <S.PostImages>
           {urlList.map((url) => (
+            <S.PostImageWithIcon>
               <S.PostImage src={url}></S.PostImage>
+              <S.DeleteImageButton />
+            </S.PostImageWithIcon>
            ))}
       </S.PostImages>
       }

@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import deleteIcon from "../../assets/images/delete_image_icon.png"
 
 export const UpdateBoardPage = styled.div`
 
@@ -61,19 +62,39 @@ export const FileView = styled.div`
   align-items: center;
   width: 70%;
   overflow: auto;
+  margin-top: 40px;
 `;
 
 export const PostContainer = styled.div``;
 
 export const PostImages = styled.div`
-    display: flex;
-    flex-direction: row;
-    overflow: auto;
-    height: 10em;
+  display: flex;
+  flex-direction: row;
+  overflow: auto;
+  height: 10em;
 `;
 
 export const PostImage = styled.img`
-    margin: 0 10px 0 10px;
-    width: auto;
-    height: 10em;
+  margin: 0 10px 0 10px;
+  width: auto;
+  height: 10em;
+`;
+
+export const DeleteImageButton = styled.button`
+  position: absolute;
+  right: 15px;
+  
+  background-image: url(${deleteIcon});
+  width: 30px;
+  height: 30px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+`;
+
+export const PostImageWithIcon = styled.div`
+  position: relative;
 `;
