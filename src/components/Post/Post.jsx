@@ -1,13 +1,16 @@
 import DeletePost from "../DeletePost";
 import * as S from "./Post.style";
+import { useNavigate } from "react-router-dom";
 
 const PostHeader = ({postInfo}) => {
+    const navigate = useNavigate();
+
     return (
         <S.PostHeader>
             <S.TitileAndButton>
                 <S.PostTitle>{postInfo.title}</S.PostTitle>
                 <S.Buttons>
-                    <S.UpdateButton />
+                    <S.UpdateButton onMouseDown={() => navigate("/boards/update")}/>
                     <S.DeleteButton onMouseDown={() => DeletePost()}/>
                 </S.Buttons>
             </S.TitileAndButton>

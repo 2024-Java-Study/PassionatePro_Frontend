@@ -70,8 +70,9 @@ const CreateBoardPage = () => {
     const formData = new FormData();
     formData.append("title", boardInfo.title);
     formData.append("content", boardInfo.content);
-    formData.append("images", file[0]);
-
+    if (file) {
+      formData.append("images", file[0]);
+    }
     createBoardAPI(formData);
     navigate("/");
   };
@@ -115,9 +116,7 @@ const CreateBoardPage = () => {
           ref={inputEl}
         />
 
-{fileName?
-        <S.AttachedFile className="file-name">{fileName}</S.AttachedFile> : ""}
-        
+        {fileName? <S.AttachedFile className="file-name">{fileName}</S.AttachedFile> : ""}
         <br />
         <br />
         <S.CompleteButton onClick={handleCreateBoardPage}>
