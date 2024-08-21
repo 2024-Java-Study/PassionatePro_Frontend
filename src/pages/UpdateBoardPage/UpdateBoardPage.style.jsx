@@ -1,6 +1,8 @@
 import styled from "@emotion/styled";
 
-export const UpdateBoardPage = styled.div``;
+export const UpdateBoardPage = styled.div`
+
+`;
 
 export const Line = styled.div`
   border: 1px solid black;
@@ -52,4 +54,26 @@ export const AttachedFile = styled.p`
   font-size: 9x;
   font-weight: bold;
   color: #999;
+`;
+
+export const FileView = styled.div`
+  display: flex;
+  align-items: center;
+  width: 70%;
+  overflow: auto;
+`;
+
+export const PostContainer = styled.div``;
+
+export const PostImages = styled.div`
+    display: flex;
+    flex-direction: row;
+    overflow: auto;
+    height: 10em;
+`;
+
+export const PostImage = styled.img`
+    margin: 0 10px 0 10px;
+    width: auto;
+    height: 10em;
 `;

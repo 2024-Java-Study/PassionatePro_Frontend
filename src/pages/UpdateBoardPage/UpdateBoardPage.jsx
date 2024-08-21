@@ -6,6 +6,19 @@ import TextareaAutosize from "react-textarea-autosize";
 import axios from "../../customAxios"
 
 
+const PostContainer = ({urlList}) => {
+  const containFiles = urlList.length > 0;
+  return (<S.PostContainer>
+      { containFiles && 
+      <S.PostImages>
+          {urlList.map((url) => (
+              <S.PostImage src={url}></S.PostImage>
+           ))}
+      </S.PostImages>
+      }
+  </S.PostContainer>);
+};
+
 const UpdateBoardPage = () => {
   
   const inputEl = useRef(null);
@@ -60,6 +73,7 @@ const UpdateBoardPage = () => {
         setBoardInfo({
           title: result.data.response.title,
           content: result.data.response.content,
+          urlList: result.data.response.urlList,
         });
       })
       .catch((error) => {
@@ -94,6 +108,7 @@ const UpdateBoardPage = () => {
   const [boardInfo, setBoardInfo] = useState({
     title: "",
     content: "",
+    urlList: [],
   });
 
   const onChangeInfo = (e) => {
@@ -144,19 +159,23 @@ const UpdateBoardPage = () => {
           minRows={10}
         />
 
+        <S.FileView>
+          <PostContainer urlList={boardInfo.urlList} />
+        </S.FileView>
+
         <label for="file">
         <S.StyledFileInput>
           <S.AttachmentButton>Upload File</S.AttachmentButton>
         </S.StyledFileInput>
         </label>
-        <S.UploadFile
-          name="file"
-          type="file"
-          accept="image/*"
-          onChange={onChangeFile}
-          id="file"
-          ref={inputEl}
-        />
+          <S.UploadFile
+            name="file"
+            type="file"
+            accept="image/*"
+            onChange={onChangeFile}
+            id="file"
+            ref={inputEl}
+          />
         {fileName? <S.AttachedFile className="file-name">{fileName}</S.AttachedFile> : ""}
         <br />
         <br />
