@@ -14,7 +14,6 @@ const CommentInput = (command) => {
         e.preventDefault();
         if (commentInfo.command===0) commentCreateAPI(commentInfo.id, commentInfo.content);
         if (commentInfo.command===1) commentModifyAPI(commentInfo.id, commentInfo.content);
-        window.location.reload();
     };
 
     const onChangeInfo = (e) => {
@@ -36,6 +35,7 @@ const CommentInput = (command) => {
                 }
             }
         ).then((result) => {
+            window.location.reload();
             console.log(result);
             window.alert("댓글이 작성되었습니다.");
         }).catch((error) => {
@@ -56,6 +56,7 @@ const CommentInput = (command) => {
                 }
             }
         ).then((result) => {
+            window.location.reload();
             console.log(result);
             window.alert("댓글이 수정되었습니다.");
         }).catch((error) => {
@@ -74,7 +75,8 @@ const CommentInput = (command) => {
                 value={commentInfo.content}
                 placeholder="댓글을 입력하세요..."
             />
-            <S.Button onClick={handleSubmit}/>
+            {/* <S.Button onMouseDown={() => handleSubmit()}/> */}
+            <S.Button onMouseDown={handleSubmit}/>
         </S.CommentInput>
     );
 };

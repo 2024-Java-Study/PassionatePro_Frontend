@@ -16,6 +16,12 @@ export const CommentHeader = styled.div`
     display: flex;
     margin: 0 5px 10px 5px;
 `;
+
+export const WriterInfo = styled.div`
+    flex: none;
+    display: flex;
+`;
+
 export const WriterProfile = styled.img`
     width: 30px;
     height: 30px;
@@ -26,18 +32,21 @@ export const WriterName = styled.div`
 `;
 
 export const KebabButton = styled.div`
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: 10px;
 `;
 
 export const KebabButtonIcon = styled.img`
-    margin-left: auto;
-    margin-right: 10px;
     width: 15px;
     height: 15px;
     cursor: pointer;
+    margin-left: auto;
 `;
 
 export const Menu = styled.div`
-    // margin-left: 0;
+    margin-left: auto;
     margin-right: 10px;
     height: 15px;
 `;
@@ -48,6 +57,7 @@ export const KebabMenu = styled.ul`
 
 export const KebabList = styled.li`
     border: 1px solid gray;
+    background-color: white;
     font-size: small;
     padding: 5px;
     cursor: pointer;
