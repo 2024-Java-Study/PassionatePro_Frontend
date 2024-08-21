@@ -21,7 +21,7 @@ const PostHeader = ({postInfo}) => {
                 {postInfo.date}
             </S.PostDate>
             </S.PostInfo>
-        </S.PostHeader>ß
+        </S.PostHeader>
     );
 };
 
