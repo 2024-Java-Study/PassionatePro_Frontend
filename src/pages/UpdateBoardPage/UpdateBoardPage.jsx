@@ -31,22 +31,25 @@ const UpdateBoardPage = () => {
     setFile(e.target.files);
   };
 
-  // const [result, setResult] = useEffect();
+  useEffect(() => {
+    GetBoardInfo();
+  }, []);
 
+  // const [isEditing, setIsEditing] = useState();
 
-  const UpdateBoardAPI = (formData) => {
+  // useEffect(() => {
+  //   if (result != undefined) {
+  //     setIsEditing({
+  //       title: result.title,
+  //       content: result.content,
+  //       urlList: result.urlList,
+  //     })
+  //   }
+  // }, [result]);
 
-    // useEffect(() => {
-    //   setIsEditing({
-    //     title: result.response.title,
-    //     content: result.response.content,
-    //     urlList: result.response.urlList,
-    //   })
-    // }, [result]);
-
+  const GetBoardInfo = () => {
     const postId = localStorage.getItem("postId");
     const API = process.env.REACT_APP_API_URL + `/boards/${postId}`;
-
     axios
       .get(API, {
         withCredentials: true,
@@ -54,12 +57,21 @@ const UpdateBoardPage = () => {
       .then((result) => {
         console.log(result);
         console.log("게시물 수정 데이터 불러오기");
-        // setResult(result);
+        setBoardInfo({
+          title: result.data.response.title,
+          content: result.data.response.content,
+        });
       })
       .catch((error) => {
         console.log(error);
         console.log("게시물 수정 데이터 불러오기 실패");
-      })
+      });
+  }
+
+  const UpdateBoardAPI = (formData) => {
+
+    // const postId = localStorage.getItem("postId");
+    // const API = process.env.REACT_APP_API_URL + `/boards/${postId}`;
 
     // axios
     //   .put(API, formData, {
@@ -76,18 +88,13 @@ const UpdateBoardPage = () => {
     //     console.log(error);
     //     console.log("게시물 수정 실패");
     //   });
+
   };
 
   const [boardInfo, setBoardInfo] = useState({
     title: "",
     content: "",
   });
-
-  // const [isEditing, setIsEditing] = useEffect({
-  //   title: "",
-  //   content: "",
-  //   urlList: "",
-  // });
 
   const onChangeInfo = (e) => {
     setBoardInfo({
@@ -111,34 +118,17 @@ const UpdateBoardPage = () => {
     navigate("/");
   };
 
-  // const handleBlur = (field) => {
-  //   setIsEditing((prev) => ({
-  //     ...prev,
-  //     [field]: false,
-  //   }));
-  // };
-
-  // const handleFocus = (field) => {
-  //   setIsEditing((prev) => ({
-  //     ...prev,
-  //     [field]: true,
-  //   }));
-  // };
-
   return (
     <S.UpdateBoardPage>
       <PageLayout header={<Header />}></PageLayout>
       <S.Line></S.Line>
       <S.UpdateBoardContent>
-        {/* <S.InputTitle
+        <S.InputTitle
           name="title"
           onChange={onChangeInfo}
-          value={isEditing.title ? isEditing.title : ''}
-          placeholder={isEditing.title ? '' : isEditing.title}
-          onBlur={() => handleBlur(isEditing.title)}
-          onFocus={() => handleFocus(isEditing.title)}
-          autoFocus={isEditing.title}
-        /> */}
+          value={boardInfo.title}
+          placeholder="내용을 입력하세요 ..."
+        />
         <br />
         <TextareaAutosize
           style={{
@@ -150,7 +140,7 @@ const UpdateBoardPage = () => {
           name="content"
           onChange={onChangeInfo}
           value={boardInfo.content}
-          placeholder="내용을 입력하세요 ..." // 기존 내용 불러오기
+          placeholder="내용을 입력하세요 ..."
           minRows={10}
         />
 
@@ -170,7 +160,7 @@ const UpdateBoardPage = () => {
         {fileName? <S.AttachedFile className="file-name">{fileName}</S.AttachedFile> : ""}
         <br />
         <br />
-        <S.CompleteButton onClick={UpdateBoardAPI}>
+        <S.CompleteButton onClick={handleUpdateBoardPage}>
           수정
         </S.CompleteButton>
       </S.UpdateBoardContent>
