@@ -17,7 +17,7 @@ const DeleteImage = (url, urlList, setBoardInfo) => {
 }
 
 
-const PostContainer = ({urlList, file, setBoardInfo}) => {
+const PostContainer = ({urlList, preview, setBoardInfo}) => {
   const containFiles = urlList.length > 0;
   return (<S.PostContainer>
       { containFiles && 
@@ -28,9 +28,9 @@ const PostContainer = ({urlList, file, setBoardInfo}) => {
               <S.DeleteImageButton onClick={() => DeleteImage(url, urlList, setBoardInfo)}/>
             </S.PostImageWithIcon>
            ))}
-           {file && (
+           {preview && (
             <S.PostImageWithIcon>
-              <S.PostImage src={file} alt="preview" />
+              <S.PostImage src={preview} alt="preview" />
               <S.DeleteImageButton onClick={() => DeleteImage(urlList, setBoardInfo)}/>
             </S.PostImageWithIcon>
           )}
@@ -60,6 +60,7 @@ const UpdateBoardPage = () => {
   }, [inputEl, fileInputHandler]);
 
   const [file, setFile] = useState([]);
+  const [preview, setPreview] = useState([]);
 
   // const onChangeFile = (e) => {
   //   const selectedFiles = e.target.files; // 선택된 파일들의 FileList 객체
@@ -76,8 +77,10 @@ const UpdateBoardPage = () => {
   //   }
   // };
 
+
   const onChangeFile = (e) => {
     const selectedFile = e.target.files[0];
+    setPreview(e.target.files[0]);
   
     if (selectedFile) {
       const reader = new FileReader();
@@ -85,6 +88,7 @@ const UpdateBoardPage = () => {
 
       reader.onloadend = () => {
         setFile(selectedFile);
+        setPreview(reader.result);
       };
     }
   };
@@ -172,7 +176,7 @@ const UpdateBoardPage = () => {
         />
 
         <S.FileView>
-          <PostContainer urlList={boardInfo.urlList} file={file} setBoardInfo={setBoardInfo} />
+          <PostContainer urlList={boardInfo.urlList} preview={preview} setBoardInfo={setBoardInfo} />
         </S.FileView>
 
         <label for="file">
