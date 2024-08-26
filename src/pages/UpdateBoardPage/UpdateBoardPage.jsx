@@ -4,6 +4,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TextareaAutosize from "react-textarea-autosize";
 import axios from "../../customAxios"
+import UpdatePost from "../../components/UpdatePost/UpdatePost";
+
 
 const DeleteImage = (url, urlList, setBoardInfo) => {
   const newUrlList = urlList.filter((item) => item !== url);
@@ -59,17 +61,34 @@ const UpdateBoardPage = () => {
 
   const [file, setFile] = useState([]);
 
+  // const onChangeFile = (e) => {
+  //   const selectedFiles = e.target.files; // 선택된 파일들의 FileList 객체
+  
+  //   for (const selectedFile of selectedFiles) { // `for...of` 루프를 사용하여 파일을 순회
+  //     if (selectedFile) { // 파일이 유효한지 확인
+  //       const reader = new FileReader(); // FileReader 객체 생성
+  //       reader.readAsDataURL(selectedFile); // 파일을 Data URL로 읽기 시작
+  
+  //       reader.onloadend = () => {
+  //         setFile((prevFiles) => [...prevFiles, reader.result]); // 이전 파일 목록에 새로운 파일 추가
+  //       };
+  //     }
+  //   }
+  // };
+
   const onChangeFile = (e) => {
     const selectedFile = e.target.files[0];
+  
     if (selectedFile) {
       const reader = new FileReader();
       reader.readAsDataURL(selectedFile);
-  
+
       reader.onloadend = () => {
         setFile(reader.result);
       };
     }
   };
+  
 
   useEffect(() => {
     GetBoardInfo();
@@ -90,36 +109,12 @@ const UpdateBoardPage = () => {
           content: result.data.response.content,
           urlList: result.data.response.urlList,
         });
-        // setFile(result.data.response.urlList);
       })
       .catch((error) => {
         console.log(error);
         console.log("게시물 수정 데이터 불러오기 실패");
       });
   }
-
-  const UpdateBoardAPI = (formData) => {
-
-    // const postId = localStorage.getItem("postId");
-    // const API = process.env.REACT_APP_API_URL + `/boards/${postId}`;
-
-    // axios
-    //   .put(API, formData, {
-    //     withCredentials: true,
-    //     headers: {
-    //       "Content-Type": "multipart/form-data",
-    //     },
-    //   })
-    //   .then((result) => {
-    //     console.log(result);
-    //     console.log("게시물 수정 성공");
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //     console.log("게시물 수정 실패");
-    //   });
-
-  };
 
   const [boardInfo, setBoardInfo] = useState({
     title: "",
@@ -143,9 +138,11 @@ const UpdateBoardPage = () => {
     formData.append("content", boardInfo.content);
 
     if (file) {
-      formData.append("images", file); ///
+      formData.append("images", file[0]);
     }
-    UpdateBoardAPI(formData);
+    formData.append("imageUrls", boardInfo.urlList);
+    console.log(formData.get("images"));
+    UpdatePost(formData);
     navigate("/");
   };
 
