@@ -5,8 +5,17 @@ import { useNavigate } from "react-router-dom";
 import TextareaAutosize from "react-textarea-autosize";
 import axios from "../../customAxios"
 
+const DeleteImage = (url, urlList, setBoardInfo) => {
+  const newUrlList = urlList.filter((item) => item !== url);
+  setBoardInfo((prevBoardInfo) => ({
+    ...prevBoardInfo,
+    urlList: newUrlList,
+  }));
+  console.log(url);
+}
 
-const PostContainer = ({urlList}) => {
+
+const PostContainer = ({urlList, setBoardInfo}) => {
   const containFiles = urlList.length > 0;
   return (<S.PostContainer>
       { containFiles && 
@@ -14,7 +23,7 @@ const PostContainer = ({urlList}) => {
           {urlList.map((url) => (
             <S.PostImageWithIcon>
               <S.PostImage src={url}></S.PostImage>
-              <S.DeleteImageButton />
+              <S.DeleteImageButton onClick={() => DeleteImage(url, urlList, setBoardInfo)}/>
             </S.PostImageWithIcon>
            ))}
       </S.PostImages>
@@ -158,7 +167,7 @@ const UpdateBoardPage = () => {
         />
 
         <S.FileView>
-          <PostContainer urlList={boardInfo.urlList} />
+          <PostContainer urlList={boardInfo.urlList} setBoardInfo={setBoardInfo} />
         </S.FileView>
 
         <label for="file">
