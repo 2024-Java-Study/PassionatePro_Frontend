@@ -15,7 +15,7 @@ const DeleteImage = (url, urlList, setBoardInfo) => {
 }
 
 
-const PostContainer = ({urlList, setBoardInfo}) => {
+const PostContainer = ({urlList, file, setBoardInfo}) => {
   const containFiles = urlList.length > 0;
   return (<S.PostContainer>
       { containFiles && 
@@ -26,6 +26,12 @@ const PostContainer = ({urlList, setBoardInfo}) => {
               <S.DeleteImageButton onClick={() => DeleteImage(url, urlList, setBoardInfo)}/>
             </S.PostImageWithIcon>
            ))}
+           {file && (
+            <S.PostImageWithIcon>
+              <S.PostImage src={file} alt="preview" />
+              <S.DeleteImageButton onClick={() => DeleteImage(urlList, setBoardInfo)}/>
+            </S.PostImageWithIcon>
+          )}
       </S.PostImages>
       }
   </S.PostContainer>);
@@ -52,14 +58,17 @@ const UpdateBoardPage = () => {
   }, [inputEl, fileInputHandler]);
 
   const [file, setFile] = useState([]);
-  const onChangeFile = (e) => {
 
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      setFile(reader.result);
-   	};
-    setFile(reader.result);
+  const onChangeFile = (e) => {
+    const selectedFile = e.target.files[0];
+    if (selectedFile) {
+      const reader = new FileReader();
+      reader.readAsDataURL(selectedFile);
+  
+      reader.onloadend = () => {
+        setFile(reader.result);
+      };
+    }
   };
 
   useEffect(() => {
@@ -81,7 +90,7 @@ const UpdateBoardPage = () => {
           content: result.data.response.content,
           urlList: result.data.response.urlList,
         });
-        setFile(result.data.response.urlList);
+        // setFile(result.data.response.urlList);
       })
       .catch((error) => {
         console.log(error);
@@ -167,7 +176,7 @@ const UpdateBoardPage = () => {
         />
 
         <S.FileView>
-          <PostContainer urlList={boardInfo.urlList} setBoardInfo={setBoardInfo} />
+          <PostContainer urlList={boardInfo.urlList} file={file} setBoardInfo={setBoardInfo} />
         </S.FileView>
 
         <label for="file">
