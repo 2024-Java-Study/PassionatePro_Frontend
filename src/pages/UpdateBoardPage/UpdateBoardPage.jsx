@@ -84,11 +84,10 @@ const UpdateBoardPage = () => {
       reader.readAsDataURL(selectedFile);
 
       reader.onloadend = () => {
-        setFile(reader.result);
+        setFile(selectedFile);
       };
     }
   };
-  
 
   useEffect(() => {
     GetBoardInfo();
@@ -138,10 +137,10 @@ const UpdateBoardPage = () => {
     formData.append("content", boardInfo.content);
 
     if (file) {
-      formData.append("images", file[0]);
+      formData.append("images", file);
     }
+
     formData.append("imageUrls", boardInfo.urlList);
-    console.log(formData.get("images"));
     UpdatePost(formData);
     navigate("/");
   };
