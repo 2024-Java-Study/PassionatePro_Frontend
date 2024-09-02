@@ -17,8 +17,8 @@ const DeleteImage = (url, urlList, setBoardInfo) => {
 }
 
 
-const PostContainer = ({urlList, preview, setBoardInfo}) => {
-  const containFiles = urlList.length > 0;
+const PostContainer = ({ urlList, preview, setBoardInfo, setPreview, setFile }) => {
+  const containFiles = urlList.length > 0 || preview.length > 0;
   return (<S.PostContainer>
       { containFiles && 
       <S.PostImages>
@@ -31,10 +31,10 @@ const PostContainer = ({urlList, preview, setBoardInfo}) => {
            {preview.map((prevUrl, index) => (
             <S.PostImageWithIcon key={`preview-${index}`}>
               <S.PostImage src={prevUrl} alt="preview" />
-              {/* <S.DeleteImageButton onClick={() => {
+              <S.DeleteImageButton onClick={() => {
                 setPreview((prevPreviews) => prevPreviews.filter((_, i) => i !== index));
                 setFile((prevFiles) => prevFiles.filter((_, i) => i !== index));
-              }} /> */}
+              }} />
             </S.PostImageWithIcon>
           ))}
       </S.PostImages>
@@ -170,7 +170,8 @@ const UpdateBoardPage = () => {
         />
 
         <S.FileView>
-          <PostContainer urlList={boardInfo.urlList} preview={preview} setBoardInfo={setBoardInfo} />
+        {/* urlList, preview, setBoardInfo, setPreview, setFile */}
+          <PostContainer urlList={boardInfo.urlList} preview={preview} setBoardInfo={setBoardInfo} setPreview={setPreview} setFile={setFile}/>
         </S.FileView>
 
         <label for="file">
