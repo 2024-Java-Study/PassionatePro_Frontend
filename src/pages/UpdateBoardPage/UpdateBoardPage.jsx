@@ -6,6 +6,10 @@ import TextareaAutosize from "react-textarea-autosize";
 import axios from "../../customAxios"
 import UpdatePost from "../../components/UpdatePost/UpdatePost";
 
+const CheckCountFile = (files = [], urlList = []) => {
+  return files.length + urlList.length <= 5;
+};
+
 
 const DeleteImage = (url, urlList, setBoardInfo) => {
   const newUrlList = urlList.filter((item) => item !== url);
@@ -67,20 +71,20 @@ const UpdateBoardPage = () => {
 
 
   const onChangeFile = (e) => {
-    // console.log(e.target.files)
-    // console.log(e.target.files[e.target.files.length - 1])
 
     const selectedFile = e.target.files[0];
-    // setPreview(e.target.files[0]);
   
     if (selectedFile) {
       const reader = new FileReader();
       reader.readAsDataURL(selectedFile);
-
       reader.onloadend = () => {
-        setFile((prevFiles) => [...prevFiles, selectedFile]);
-        // console.log(file)
-        setPreview((prevPreviews) => [...prevPreviews, reader.result]);
+        const newFiles = [...file, selectedFile];
+        if (CheckCountFile(newFiles, boardInfo.urlList)) {
+          setFile(newFiles);
+          setPreview((prevPreviews) => [...prevPreviews, reader.result]);
+        } else {
+          alert("사진은 최대 5개까지 추가할 수 있습니다.");
+        }
       };
     }
   };
@@ -88,6 +92,10 @@ const UpdateBoardPage = () => {
   useEffect(() => {
     GetBoardInfo();
   }, []);
+
+  useEffect(() => {
+    CheckCountFile(file);
+  }, [file])
 
   const GetBoardInfo = () => {
     const postId = localStorage.getItem("postId");
