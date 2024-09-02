@@ -28,12 +28,15 @@ const PostContainer = ({urlList, preview, setBoardInfo}) => {
               <S.DeleteImageButton onClick={() => DeleteImage(url, urlList, setBoardInfo)}/>
             </S.PostImageWithIcon>
            ))}
-           {preview && (
-            <S.PostImageWithIcon>
-              <S.PostImage src={preview} alt="preview" />
-              <S.DeleteImageButton onClick={() => DeleteImage(urlList, setBoardInfo)}/>
+           {preview.map((prevUrl, index) => (
+            <S.PostImageWithIcon key={`preview-${index}`}>
+              <S.PostImage src={prevUrl} alt="preview" />
+              {/* <S.DeleteImageButton onClick={() => {
+                setPreview((prevPreviews) => prevPreviews.filter((_, i) => i !== index));
+                setFile((prevFiles) => prevFiles.filter((_, i) => i !== index));
+              }} /> */}
             </S.PostImageWithIcon>
-          )}
+          ))}
       </S.PostImages>
       }
   </S.PostContainer>);
@@ -62,33 +65,22 @@ const UpdateBoardPage = () => {
   const [file, setFile] = useState([]);
   const [preview, setPreview] = useState([]);
 
-  // const onChangeFile = (e) => {
-  //   const selectedFiles = e.target.files; // 선택된 파일들의 FileList 객체
-  
-  //   for (const selectedFile of selectedFiles) { // `for...of` 루프를 사용하여 파일을 순회
-  //     if (selectedFile) { // 파일이 유효한지 확인
-  //       const reader = new FileReader(); // FileReader 객체 생성
-  //       reader.readAsDataURL(selectedFile); // 파일을 Data URL로 읽기 시작
-  
-  //       reader.onloadend = () => {
-  //         setFile((prevFiles) => [...prevFiles, reader.result]); // 이전 파일 목록에 새로운 파일 추가
-  //       };
-  //     }
-  //   }
-  // };
-
 
   const onChangeFile = (e) => {
+    // console.log(e.target.files)
+    // console.log(e.target.files[e.target.files.length - 1])
+
     const selectedFile = e.target.files[0];
-    setPreview(e.target.files[0]);
+    // setPreview(e.target.files[0]);
   
     if (selectedFile) {
       const reader = new FileReader();
       reader.readAsDataURL(selectedFile);
 
       reader.onloadend = () => {
-        setFile(selectedFile);
-        setPreview(reader.result);
+        setFile((prevFiles) => [...prevFiles, selectedFile]);
+        // console.log(file)
+        setPreview((prevPreviews) => [...prevPreviews, reader.result]);
       };
     }
   };
@@ -141,7 +133,9 @@ const UpdateBoardPage = () => {
     formData.append("content", boardInfo.content);
 
     if (file) {
-      formData.append("images", file);
+      file.forEach((f) => {
+        formData.append("images", f);
+      });
     }
 
     formData.append("imageUrls", boardInfo.urlList);
