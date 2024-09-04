@@ -1,5 +1,4 @@
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 axios.interceptors.response.use(config => {
     // console.log("응답");

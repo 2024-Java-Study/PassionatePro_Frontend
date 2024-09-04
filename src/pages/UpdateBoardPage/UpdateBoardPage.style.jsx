@@ -1,6 +1,9 @@
 import styled from "@emotion/styled";
+import deleteIcon from "../../assets/images/delete_image_icon.png"
 
-export const UpdateBoardPage = styled.div``;
+export const UpdateBoardPage = styled.div`
+
+`;
 
 export const Line = styled.div`
   border: 1px solid black;
@@ -29,4 +32,69 @@ export const CompleteButton = styled.button`
   color: white;
   border: none;
   cursor: pointer;
+`;
+
+export const UploadFile = styled.input`
+display: none;
+`;
+
+export const StyledFileInput = styled.div`
+  margin-top: 10px;
+`;
+
+export const AttachmentButton = styled.div`
+  padding: 6px;
+  background-color: lightGray;
+  color: #7e7e7e;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 13px;
+`;
+
+export const AttachedFile = styled.p`
+  font-size: 9x;
+  font-weight: bold;
+  color: #999;
+`;
+
+export const FileView = styled.div`
+  display: flex;
+  align-items: center;
+  width: 70%;
+  overflow: auto;
+  margin-top: 40px;
+`;
+
+export const PostContainer = styled.div``;
+
+export const PostImages = styled.div`
+  display: flex;
+  flex-direction: row;
+  overflow: auto;
+  height: 10em;
+`;
+
+export const PostImage = styled.img`
+  margin: 0 10px 0 10px;
+  width: auto;
+  height: 10em;
+`;
+
+export const DeleteImageButton = styled.button`
+  position: absolute;
+  right: 15px;
+  
+  background-image: url(${deleteIcon});
+  width: 30px;
+  height: 30px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+`;
+
+export const PostImageWithIcon = styled.div`
+  position: relative;
 `;
