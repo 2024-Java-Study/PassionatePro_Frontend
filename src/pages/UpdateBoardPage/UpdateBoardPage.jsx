@@ -178,7 +178,6 @@ const UpdateBoardPage = () => {
         />
 
         <S.FileView>
-        {/* urlList, preview, setBoardInfo, setPreview, setFile */}
           <PostContainer urlList={boardInfo.urlList} preview={preview} setBoardInfo={setBoardInfo} setPreview={setPreview} setFile={setFile}/>
         </S.FileView>
 

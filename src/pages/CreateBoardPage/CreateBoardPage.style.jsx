@@ -1,4 +1,6 @@
 import styled from "@emotion/styled";
+import deleteIcon from "../../assets/images/delete_image_icon.png"
+
 
 export const CreateBoardPage = styled.div``;
 
@@ -54,4 +56,46 @@ export const AttachedFile = styled.p`
   font-size: 9x;
   font-weight: bold;
   color: #999;
+`;
+
+export const FileView = styled.div`
+  display: flex;
+  align-items: center;
+  width: 70%;
+  overflow: auto;
+  margin-top: 40px;
+`;
+
+export const PostContainer = styled.div``;
+
+export const PostImages = styled.div`
+  display: flex;
+  flex-direction: row;
+  overflow: auto;
+  height: 10em;
+`;
+
+export const PostImage = styled.img`
+  margin: 0 10px 0 10px;
+  width: auto;
+  height: 10em;
+`;
+
+export const DeleteImageButton = styled.button`
+  position: absolute;
+  right: 15px;
+  
+  background-image: url(${deleteIcon});
+  width: 30px;
+  height: 30px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+`;
+
+export const PostImageWithIcon = styled.div`
+  position: relative;
 `;
