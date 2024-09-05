@@ -5,8 +5,30 @@ import { useNavigate } from "react-router-dom";
 import TextareaAutosize from "react-textarea-autosize";
 import axios from "../../customAxios"
 
-const CreateBoardPage = () => {
+const CheckCountFile = (files = []) => {
+  return files.length <= 5;
+};
 
+const PostContainer = ({ preview, setPreview, setFile }) => {
+  const containFiles = preview.length > 0;
+  return (<S.PostContainer>
+      { containFiles && 
+      <S.PostImages>
+           {preview.map((prevUrl, index) => (
+            <S.PostImageWithIcon key={`preview-${index}`}>
+              <S.PostImage src={prevUrl} alt="preview" />
+              <S.DeleteImageButton onClick={() => {
+                setPreview((prevPreviews) => prevPreviews.filter((_, i) => i !== index));
+                setFile((prevFiles) => prevFiles.filter((_, i) => i !== index));
+              }} />
+            </S.PostImageWithIcon>
+          ))}
+      </S.PostImages>
+      }
+  </S.PostContainer>);
+};
+
+const CreateBoardPage = () => {
   const inputEl = useRef(null);
   const [fileName, setFileName] = useState("");
   const fileInputHandler = useCallback((event) => {
@@ -50,7 +72,8 @@ const CreateBoardPage = () => {
     content: "",
   });
 
-  const [file, setFile] = useState(null);
+  const [file, setFile] = useState([]);
+  const [preview, setPreview] = useState([]);
 
   const onChangeInfo = (e) => {
     setBoardInfo({
@@ -60,8 +83,27 @@ const CreateBoardPage = () => {
   };
 
   const onChangeFile = (e) => {
-    setFile(e.target.files);
+
+    const selectedFile = e.target.files[0];
+  
+    if (selectedFile) {
+      const reader = new FileReader();
+      reader.readAsDataURL(selectedFile);
+      reader.onloadend = () => {
+        const newFiles = [...file, selectedFile];
+        if (CheckCountFile(newFiles)) {
+          setFile(newFiles);
+          setPreview((prevPreviews) => [...prevPreviews, reader.result]);
+        } else {
+          alert("사진은 최대 5개까지 추가할 수 있습니다.");
+        }
+      };
+    }
   };
+
+  useEffect(() => {
+    CheckCountFile(file);
+  }, [file])
 
   const navigate = useNavigate();
   const handleCreateBoardPage = (e) => {
@@ -71,7 +113,9 @@ const CreateBoardPage = () => {
     formData.append("title", boardInfo.title);
     formData.append("content", boardInfo.content);
     if (file) {
-      formData.append("images", file[0]);
+      file.forEach((f) => {
+        formData.append("images", f);
+      });
     }
     createBoardAPI(formData);
     navigate("/");
@@ -102,6 +146,11 @@ const CreateBoardPage = () => {
           placeholder="내용을 입력하세요 ..."
           minRows={10}
         />
+
+        <S.FileView>
+          <PostContainer preview={preview} setPreview={setPreview} setFile={setFile}/>
+        </S.FileView>
+
         <label for="file">
         <S.StyledFileInput>
           <S.AttachmentButton>Upload File</S.AttachmentButton>
